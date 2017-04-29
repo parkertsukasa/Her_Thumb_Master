@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StateManagerScript : MonoBehaviour {
 
 	public enum state {
 		idle, guard, check, attack, snake, bind_s, bind_l, hold_s, hold_m, hold_l, held_s, held_m, held_l
 	}
+
+	public Text STATE;
 
 	public state nowstate = state.idle;//現在の状態を格納する変数
 
@@ -24,11 +27,14 @@ public class StateManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		STATE.text = nowstate.ToString();
+
 		//bind状態（短）からの復帰
 		if (nowstate == state.bind_s) {
 			timer += Time.deltaTime;
 			if (timer >= bindtime_short) {
 				nowstate = state.idle;
+				timer = 0;
 			}
 		}
 		//bind状態（長）からの復帰
@@ -36,6 +42,7 @@ public class StateManagerScript : MonoBehaviour {
 			timer += Time.deltaTime;
 			if (timer >= bindtime_long) {
 				nowstate = state.idle;
+				timer = 0;
 			}
 		}
 
@@ -65,10 +72,11 @@ public class StateManagerScript : MonoBehaviour {
 	public void Bind_S(){
 		nowstate = state.bind_s;
 	}
-
-
+		
 	//攻撃失敗時に呼び出す(長)
 	public void Bind_L(){
 		nowstate = state.bind_l;
 	}
+
+
 }
