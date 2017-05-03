@@ -13,10 +13,18 @@ public class StateManagerScript : MonoBehaviour {
 
 	public state nowstate = state.idle;//現在の状態を格納する変数
 
-	float timer = 0.0f;//「bind」の時間を測るタイマー
+	private float timer = 0.0f;//「bind」の時間を測るタイマー
 
-	const float bindtime_short = 1.0f;//「bind_s」の持続時間
-	const float bindtime_long = 3.0f;//「bind_s」の持続時間
+	private const float bindtime_short = 1.0f;//「bind_s」の持続時間
+	private const float bindtime_long = 3.0f;//「bind_s」の持続時間
+
+
+	public enum move_state
+	{
+		idle, walk,idle_dush, dash
+	}
+
+	public move_state runstate = move_state.idle;//2度押しでダッシュをするために状態を取得する
 
 
 	// Use this for initialization
@@ -44,6 +52,11 @@ public class StateManagerScript : MonoBehaviour {
 				nowstate = state.idle;
 				timer = 0;
 			}
+		}
+
+		//idle_dushの解除
+		if (runstate == move_state.idle_dush) {
+			Invoke ("StateReset", 0.3f);
 		}
 
 	}

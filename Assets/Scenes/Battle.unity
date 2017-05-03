@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 544230021}
   - component: {fileID: 544230024}
   - component: {fileID: 544230025}
+  - component: {fileID: 544230026}
   m_Layer: 0
   m_Name: Battle_Manager
   m_TagString: Untagged
@@ -232,6 +233,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40e52adf045fc4319bbf9f26492a447b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &544230026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 544230020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f9bf326754f7463c81465c42b3c449d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &714105604
@@ -570,6 +582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   STATE: {fileID: 1764654938}
   nowstate: 0
+  runstate: 0
 --- !u!4 &1096511052
 Transform:
   m_ObjectHideFlags: 0
@@ -1025,6 +1038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   STATE: {fileID: 714105606}
   nowstate: 0
+  runstate: 0
 --- !u!114 &2001753190
 MonoBehaviour:
   m_ObjectHideFlags: 0

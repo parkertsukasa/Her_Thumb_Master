@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class HPManagerScript : MonoBehaviour {
 
-	GameObject player1;
-	GameObject player2;
+	private GameObject player1;
+	private GameObject player2;
 
-	PlayerHPScript PHPS_1P;
-	PlayerHPScript PHPS_2P;
+	private PlayerHPScript PHPS_1P;
+	private PlayerHPScript PHPS_2P;
 
-	int hp_1p;
-	int hp_2p;
+	private int hp_1p;
+	private int hp_2p;
 
 	public GameObject hpb1;
 	public GameObject hpb2;

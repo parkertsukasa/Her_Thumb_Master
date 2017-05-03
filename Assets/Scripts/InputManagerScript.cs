@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class InputManagerScript : MonoBehaviour {
 
-	GameObject player1;
-	GameObject player2;
+	private GameObject player1;
+	private GameObject player2;
 
-	MoveManagerScript MMS;
+	private MoveManagerScript MMS;
 
-	StateManagerScript SMS_1P;
-	StateManagerScript SMS_2P;
+	private StateManagerScript SMS_1P;
+	private StateManagerScript SMS_2P;
 
-	ActionManagerScript AMS;
+	private ActionManagerScript AMS;
 
-	float hrzn_1p;
-	float hrzn_2p;
+	private float hrzn_1p;//ps4用
+	private float hrzn_2p;//ps4用
 
-	float jchrzn_1p;
-	float jchrzn_2p;
+	private float jchrzn_1p;//Switch用
+	private float jchrzn_2p;//Switch用
 
 	// Use this for initialization
 	void Start () {
@@ -46,22 +46,36 @@ public class InputManagerScript : MonoBehaviour {
 
 
 		//------------左スティック入力による移動----------------------------
-		if (hrzn_1p != 0) {
-			Transform t = player1.transform;
-			MMS.Player_Move (t, hrzn_1p);
-		}
-		if (hrzn_2p != 0) {
-			Transform t = player2.transform;
-			MMS.Player_Move (t, hrzn_2p);
-		}	
 
+		//------------ps4コントローラー----------------------------
+		if (hrzn_1p >= 0.5f || hrzn_1p <= -0.5f) {
+			MMS.Player_Move (player1, hrzn_1p);
+		} else {
+			if (SMS_1P.runstate == StateManagerScript.move_state.walk || SMS_1P.runstate == StateManagerScript.move_state.idle_dush) {
+				SMS_1P.runstate = StateManagerScript.move_state.idle_dush;
+			} else {
+				SMS_1P.runstate = StateManagerScript.move_state.idle;
+			}
+		}
+		if (hrzn_2p >= 0.5 || hrzn_2p <= -0.5f) {
+			MMS.Player_Move (player2, hrzn_2p);
+		} else {
+			if (SMS_2P.runstate == StateManagerScript.move_state.walk) {
+				SMS_2P.runstate = StateManagerScript.move_state.idle_dush;
+			} else {
+				SMS_2P.runstate = StateManagerScript.move_state.idle;
+			}
+		}
+
+
+
+
+		//------------Switchコントローラー-------------------------
 		if (jchrzn_1p != 0) {
-			Transform t = player1.transform;
-			MMS.Player_Move (t, jchrzn_1p);
+			MMS.Player_Move (player1, jchrzn_1p);
 		}
 		if (jchrzn_2p != 0) {
-			Transform t = player2.transform;
-			MMS.Player_Move (t, jchrzn_2p);
+			MMS.Player_Move (player2, jchrzn_2p);
 		}
 
 

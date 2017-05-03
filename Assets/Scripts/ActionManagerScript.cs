@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ActionManagerScript : MonoBehaviour {
 
-	GameObject player1;
-	GameObject player2;
+	private GameObject player1;
+	private GameObject player2;
 
-	float distance;//1Pと2Pの距離を入れる変数
+	private float distance;//1Pと2Pの距離を入れる変数
 
-	const float action_range = 2.0f;//攻撃等が行える距離の上限、定数
+	private const float action_range = 2.0f;//攻撃等が行える距離の上限、定数
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +20,7 @@ public class ActionManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		distance = Mathf.Abs(player2.transform.position.x - player1.transform.position.x);
+		distance = Mathf.Abs( player2.transform.position.x - player1.transform.position.x);
 		Debug.Log ("Distance =" + distance);
 	}
 
