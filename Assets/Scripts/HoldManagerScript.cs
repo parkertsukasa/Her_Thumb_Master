@@ -16,13 +16,13 @@ public class HoldManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		hrzn = Input.GetAxisRaw ("1P_LeftHorizontal");
-		vrti = Input.GetAxisRaw ("1P_LeftVertical");
+		hrzn = Input.GetAxis ("1P_LeftHorizontal");
+		vrti = Input.GetAxis ("1P_LeftVertical");
 
 		if (hrzn >= 0.8f || hrzn <= -0.8f) {
 			escape += 1;
 		}
-		if (vrti >= 0.8f || hrzn <= -0.8f) {
+		if (vrti >= 0.8f || vrti <= -0.8f) {
 			escape += 1;
 		}
 
