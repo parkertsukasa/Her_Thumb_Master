@@ -17,14 +17,14 @@ public class PlayerHPScript : MonoBehaviour {
 	}
 
 	public void Damage_L (){
-		hp -= 40;
+		hp -= 4;
 	}
 
 	public void Damage_M(){
-		hp -= 20;
+		hp -= 2;
 	}
 
 	public void Damage_S(){
-		hp -= 10;
+		hp -= 1;
 	}
 }

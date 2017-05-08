@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class StateManagerScript : MonoBehaviour {
 
 	public enum state {
@@ -37,6 +38,11 @@ public class StateManagerScript : MonoBehaviour {
 
 		STATE.text = nowstate.ToString();
 
+	}
+
+
+	//----------一定時間経過でbind状態からの復帰
+	private void BindReset(){
 		//bind状態（短）からの復帰
 		if (nowstate == state.bind_s) {
 			timer += Time.deltaTime;
@@ -58,7 +64,6 @@ public class StateManagerScript : MonoBehaviour {
 		if (runstate == move_state.idle_dush) {
 			Invoke ("StateReset", 0.3f);
 		}
-
 	}
 
 	//InputManagerScriptから□ボタン入力時に呼び出す

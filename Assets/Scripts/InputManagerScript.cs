@@ -41,7 +41,6 @@ public class InputManagerScript : MonoBehaviour {
 		jchrzn_1p = Input.GetAxis ("JoyCon1_Horizontal");
 		jchrzn_2p = Input.GetAxis ("JoyCon2_Horizontal");
 
-		Debug.Log (jchrzn_2p);
 
 
 
@@ -80,39 +79,39 @@ public class InputManagerScript : MonoBehaviour {
 
 
 		//-----------攻撃等のアクション------------------------------------
-		if (Input.GetButton ("1P_Circle")) {
+		if (Input.GetButtonDown ("1P_Circle")) {
 			SMS_1P.Snake ();
 			AMS.Snake (player2, player1);
 		}
-		if (Input.GetButton ("2P_Circle")) {
+		if (Input.GetButtonDown ("2P_Circle")) {
 			SMS_2P.Snake ();
 			AMS.Snake (player1, player2);
 		}
 
 
-		if (Input.GetButton ("1P_Square")) {
+		if (Input.GetButtonDown ("1P_Square")) {
 			SMS_1P.Guard ();
 			AMS.Guard (player2);
 		}
-		if (Input.GetButton ("2P_Square")) {
+		if (Input.GetButtonDown ("2P_Square")) {
 			SMS_2P.Guard ();
 			AMS.Guard (player1);
 		}
 
-		if (Input.GetButton ("1P_Cross")) {
+		if (Input.GetButtonDown ("1P_Cross")) {
 			SMS_1P.Attack ();
 			AMS.Attack (player2, player1);
 		}
-		if (Input.GetButton ("2P_Cross")) {
+		if (Input.GetButtonDown ("2P_Cross")) {
 			SMS_2P.Attack ();
 			AMS.Attack (player1, player2);
 		}
 
-		if (Input.GetButton ("1P_Triangle")) {
+		if (Input.GetButtonDown ("1P_Triangle")) {
 			SMS_1P.Check ();
 			AMS.Check (player2);
 		}
-		if (Input.GetButton ("2P_Triangle")) {
+		if (Input.GetButtonDown ("2P_Triangle")) {
 			SMS_2P.Check ();
 			AMS.Check (player1);
 		}
