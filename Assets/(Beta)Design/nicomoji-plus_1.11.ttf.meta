@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 16fe69d2f7968467db9e324514adf73c
+timeCreated: 1493985356
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: NicoMoji+
+  fontNames:
+  - NicoMoji+
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
