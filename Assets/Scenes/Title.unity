@@ -591,7 +591,10 @@ Transform:
   - {fileID: 871561722}
   - {fileID: 121827501}
   - {fileID: 1969935870}
+<<<<<<< HEAD
   - {fileID: 1079782256}
+=======
+>>>>>>> 62a7808f70d5fd6a215a59dbe637ec183528b4aa
   m_Father: {fileID: 623701933}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -912,7 +915,10 @@ GameObject:
   m_Component:
   - component: {fileID: 623701933}
   - component: {fileID: 623701934}
+<<<<<<< HEAD
   - component: {fileID: 623701935}
+=======
+>>>>>>> 62a7808f70d5fd6a215a59dbe637ec183528b4aa
   m_Layer: 0
   m_Name: All
   m_TagString: Untagged
@@ -952,6 +958,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+<<<<<<< HEAD
 --- !u!114 &623701935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +972,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nowstate: 0
   selectok: 1
+=======
+>>>>>>> 62a7808f70d5fd6a215a59dbe637ec183528b4aa
 --- !u!1 &649461563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,8 +1153,13 @@ Camera:
   m_GameObject: {fileID: 801215604}
   m_Enabled: 1
   serializedVersion: 2
+<<<<<<< HEAD
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.77205884, g: 0.6358132, b: 0.6893718, a: 0}
+=======
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+>>>>>>> 62a7808f70d5fd6a215a59dbe637ec183528b4aa
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1392,6 +1406,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 929538924}
+<<<<<<< HEAD
 --- !u!1 &1079782255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,6 +1487,8 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1079782255}
+=======
+>>>>>>> 62a7808f70d5fd6a215a59dbe637ec183528b4aa
 --- !u!1 &1104868814
 GameObject:
   m_ObjectHideFlags: 0
