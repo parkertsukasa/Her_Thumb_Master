@@ -24,7 +24,7 @@ public class MoveManagerScript : MonoBehaviour {
 		StateManagerScript SMS;
 		SMS = p.GetComponent<StateManagerScript> ();
 
-		if (SMS.nowstate == StateManagerScript.state.idle) {
+		if (SMS.nowstate == StateManagerScript.state.idle) {//idle時のみ移動可能に
 
 			if (SMS.runstate == StateManagerScript.move_state.idle || SMS.runstate == StateManagerScript.move_state.walk) {
 				p.transform.Translate (Vector3.right * input * player_speed);
