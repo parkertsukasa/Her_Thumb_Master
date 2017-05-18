@@ -101,6 +101,7 @@ public class StateManagerScript : MonoBehaviour {
 		nowstate = state.idle;
 	}
 
+	//一秒後にidleに戻す（仮）
 	public void Idle_one_seconds_after(){
 		Invoke ("Idle", 1.0f);
 	}
