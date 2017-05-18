@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Title.unity
-=======
-- path: Assets/Scenes/2PCharaSelect.unity
->>>>>>> 62a7808f70d5fd6a215a59dbe637ec183528b4aa
+- path: Assets/Scenes/Battle.unity
   isLoaded: 1
   isActive: 1
