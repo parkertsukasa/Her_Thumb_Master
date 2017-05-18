@@ -79,6 +79,7 @@ public class InputManagerScript : MonoBehaviour {
 
 
 		//-----------攻撃等のアクション------------------------------------
+		//----- ○ボタン
 		if (Input.GetButtonDown ("1P_Circle")) {
 			SMS_1P.Snake ();
 			AMS.Snake (player2, player1);
@@ -89,7 +90,7 @@ public class InputManagerScript : MonoBehaviour {
 		}
 
 
-
+		//----- □ボタン
 		if (Input.GetButtonDown ("1P_Square")) {
 			AMS.Guard (player2, player1);
 		}
@@ -106,7 +107,7 @@ public class InputManagerScript : MonoBehaviour {
 		}
 
 
-
+		//----- ×ボタン
 		if (Input.GetButtonDown ("1P_Cross")) {
 			SMS_1P.Attack ();
 			AMS.Attack (player2, player1);
@@ -117,6 +118,7 @@ public class InputManagerScript : MonoBehaviour {
 		}
 
 
+		//----- △ボタン
 		if (Input.GetButtonDown ("1P_Triangle")) {
 			AMS.Check (player2, player1);
 		}
