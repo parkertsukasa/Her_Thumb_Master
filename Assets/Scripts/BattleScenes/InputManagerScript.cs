@@ -89,14 +89,23 @@ public class InputManagerScript : MonoBehaviour {
 		}
 
 
+
 		if (Input.GetButtonDown ("1P_Square")) {
-			SMS_1P.Guard ();
-			AMS.Guard (player2);
+			AMS.Guard (player2, player1);
 		}
 		if (Input.GetButtonDown ("2P_Square")) {
-			SMS_2P.Guard ();
-			AMS.Guard (player1);
+			AMS.Guard (player1, player2);
 		}
+		if (Input.GetButtonUp ("1P_Square")) {
+			SMS_1P.Idle ();
+			AMS.Exit_from_Guard (player2, player1);
+		}
+		if (Input.GetButtonUp ("2P_Square")) {
+			SMS_2P.Idle ();
+			AMS.Exit_from_Guard (player1, player2);
+		}
+
+
 
 		if (Input.GetButtonDown ("1P_Cross")) {
 			SMS_1P.Attack ();
@@ -107,13 +116,20 @@ public class InputManagerScript : MonoBehaviour {
 			AMS.Attack (player1, player2);
 		}
 
+
 		if (Input.GetButtonDown ("1P_Triangle")) {
-			SMS_1P.Check ();
-			AMS.Check (player2);
+			AMS.Check (player2, player1);
 		}
 		if (Input.GetButtonDown ("2P_Triangle")) {
-			SMS_2P.Check ();
-			AMS.Check (player1);
+			AMS.Check (player1, player2);
+		}
+		if (Input.GetButtonUp ("1P_Triangle")) {
+			SMS_1P.Idle ();
+			AMS.Exit_from_Check (player2, player1);
+		}
+		if (Input.GetButtonUp ("2P_Triangle")) {
+			SMS_2P.Idle ();
+			AMS.Exit_from_Check (player1, player2);
 		}
 	}
 }

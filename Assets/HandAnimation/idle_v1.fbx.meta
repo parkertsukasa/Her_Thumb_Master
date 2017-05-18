@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: ccd253188f4cc4cdd9a9b32a0fe76550
-timeCreated: 1495114880
+guid: fc61035cb906340ee96809336e380856
+timeCreated: 1495127518
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: hand01:pCube6
+    100000: hand01:pCube6
+    100002: //RootNode
     100004: joint1
     100006: joint10
     100008: joint11
@@ -34,8 +34,8 @@ ModelImporter:
     100052: joint7
     100054: joint8
     100056: joint9
-    400000: //RootNode
-    400002: hand01:pCube6
+    400000: hand01:pCube6
+    400002: //RootNode
     400004: joint1
     400006: joint10
     400008: joint11
@@ -91,15 +91,15 @@ ModelImporter:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
-      firstFrame: 0
-      lastFrame: 10
+      firstFrame: 1
+      lastFrame: 207
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
-      cycleOffset: 10
+      cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0

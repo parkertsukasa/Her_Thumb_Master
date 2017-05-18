@@ -24,15 +24,16 @@ public class MoveManagerScript : MonoBehaviour {
 		StateManagerScript SMS;
 		SMS = p.GetComponent<StateManagerScript> ();
 
-		Debug.Log ("RUN");
-		
-		if (SMS.runstate == StateManagerScript.move_state.idle || SMS.runstate == StateManagerScript.move_state.walk) {
-			p.transform.Translate (Vector3.right * input * player_speed);
-			SMS.runstate = StateManagerScript.move_state.walk;
-		}
-		if (SMS.runstate == StateManagerScript.move_state.idle_dush || SMS.runstate == StateManagerScript.move_state.dash) {
-			p.transform.Translate (Vector3.right * input * player_speed * 2.0f);
-			SMS.runstate = StateManagerScript.move_state.dash;
+		if (SMS.nowstate == StateManagerScript.state.idle) {
+
+			if (SMS.runstate == StateManagerScript.move_state.idle || SMS.runstate == StateManagerScript.move_state.walk) {
+				p.transform.Translate (Vector3.right * input * player_speed);
+				SMS.runstate = StateManagerScript.move_state.walk;
+			}
+			if (SMS.runstate == StateManagerScript.move_state.idle_dush || SMS.runstate == StateManagerScript.move_state.dash) {
+				p.transform.Translate (Vector3.right * input * player_speed * 2.0f);
+				SMS.runstate = StateManagerScript.move_state.dash;
+			}
 		}
 
 	}

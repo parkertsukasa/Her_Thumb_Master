@@ -96,5 +96,9 @@ public class StateManagerScript : MonoBehaviour {
 		nowstate = state.bind_l;
 	}
 
+	public void Idle(){
+		nowstate = state.idle;
+	}
+
 
 }
