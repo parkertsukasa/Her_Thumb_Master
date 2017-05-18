@@ -96,6 +96,7 @@ public class StateManagerScript : MonoBehaviour {
 		nowstate = state.bind_l;
 	}
 
+	//Idle状態に戻す
 	public void Idle(){
 		nowstate = state.idle;
 	}
