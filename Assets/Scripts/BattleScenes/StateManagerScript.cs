@@ -100,5 +100,9 @@ public class StateManagerScript : MonoBehaviour {
 		nowstate = state.idle;
 	}
 
+	public void Idle_one_seconds_after(){
+		Invoke ("Idle", 1.0f);
+	}
+
 
 }
