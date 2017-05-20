@@ -19,6 +19,10 @@ public class StateManagerScript : MonoBehaviour {
 	private const float bindtime_short = 1.0f;//「bind_s」の持続時間
 	private const float bindtime_long = 3.0f;//「bind_s」の持続時間
 
+	private Transform hand;
+	private Animator anim;
+
+
 
 	public enum move_state
 	{
@@ -30,7 +34,8 @@ public class StateManagerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		hand = transform.FindChild ("Hand_Model");
+		anim = hand.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -38,7 +43,23 @@ public class StateManagerScript : MonoBehaviour {
 
 		STATE.text = nowstate.ToString();
 
+		Reset_to_Idle ();
+
 	}
+
+	//---------- Animation再生終了後にIdleに戻す
+	private void Reset_to_Idle(){
+		//Debug.Log (anim.GetCurrentAnimatorStateInfo(0).normalizedTime );
+		if(nowstate == state.attack || nowstate == state.snake){
+			if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f){
+				nowstate = state.idle;
+				anim.SetBool ("Attack", false);
+				anim.SetBool ("Snake", false);
+			}
+		}
+	}
+
+
 
 
 	//----------一定時間経過でbind状態からの復帰

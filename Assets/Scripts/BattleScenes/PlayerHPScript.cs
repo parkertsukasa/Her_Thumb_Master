@@ -6,6 +6,7 @@ public class PlayerHPScript : MonoBehaviour {
 
 	public int hp;
 
+
 	// Use this for initialization
 	void Start () {
 		hp = 100;
@@ -17,14 +18,14 @@ public class PlayerHPScript : MonoBehaviour {
 	}
 
 	public void Damage_L (){
-		hp -= 4;
+		hp -= 30;
 	}
 
 	public void Damage_M(){
-		hp -= 2;
+		hp -= 20;
 	}
 
 	public void Damage_S(){
-		hp -= 1;
+		hp -= 10;
 	}
 }

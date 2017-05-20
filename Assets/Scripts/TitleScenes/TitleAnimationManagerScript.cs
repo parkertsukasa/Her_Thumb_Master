@@ -91,7 +91,7 @@ public class TitleAnimationManagerScript : MonoBehaviour {
 		case TitleState.select_2p:
 			selecticon.transform.localPosition = new Vector3 (142, -92, 0);
 			if (Input.GetButtonDown ("1P_Circle") || Input.GetButtonDown ("2P_Circle")) {
-				SceneManager.LoadScene ("2PCharaSelect");//シーン移動
+				SceneManager.LoadScene ("Battle");//シーン移動
 			}
 			if (selectok == true) {
 				//「↑」入力
