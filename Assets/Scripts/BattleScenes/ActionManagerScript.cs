@@ -7,7 +7,9 @@ public class ActionManagerScript : MonoBehaviour {
 	private GameObject player1;
 	private GameObject player2;
 
-	private float distance;//1Pと2Pの距離を入れる変数
+	public float distance;//1Pと2Pの距離を入れる変数
+
+	private bool touched = false;
 
 	private const float action_range = 2.3f;//攻撃等が行える距離の上限、定数
 
@@ -22,6 +24,14 @@ public class ActionManagerScript : MonoBehaviour {
 	void Update () {
 		distance = Mathf.Abs( player2.transform.position.x - player1.transform.position.x);
 		Debug.Log ("Distance =" + distance);
+	}
+
+	public void Touched(){
+		touched = true;
+	}
+
+	public void Released(){
+		touched = false;
 	}
 
 	//InputManagerScriptから□ボタン入力時に第1引数に[相手]を第2引数に[自分]を引数にして呼び出す
@@ -80,18 +90,11 @@ public class ActionManagerScript : MonoBehaviour {
 
 
 			//---------- 相手に応じた処理
-			if (distance <= action_range) {//1Pと2Pの距離が規定の距離より近かったら
+			if (touched == true) {//指先のコライダー同士が触れていたら
 				switch (SMS.nowstate) {
 				case StateManagerScript.state.idle://相手が「idle」だっったら
-					oppanim.SetInteger("Held_State",1);
-					SMS.nowstate = StateManagerScript.state.held_s;//相手を「held_s」状態に
+					mySMS.Bind_S ();//自分を「bind_s」状態に
 					myanim.SetBool("Attack",false);
-					//oppanim.SetInteger("Held_State",1);
-
-					mySMS.nowstate = StateManagerScript.state.hold_s;//自分を「hold_s」状態に
-					myanim.SetBool("Hold",true);
-
-					PHPS.Damage_S ();//相手にダメージ（小）を与える
 					break;
 				case StateManagerScript.state.guard://相手が「guard」だっったら
 					mySMS.Bind_S ();//自分を「bind_s」状態に
@@ -150,11 +153,12 @@ public class ActionManagerScript : MonoBehaviour {
 
 			mySMS.Snake ();
 
-			if (distance <= action_range) {//1Pと2Pの距離が規定の距離より近かったら
+			if (touched == true) {//指先のコライダー同士が触れていたら
 				
 				switch (SMS.nowstate) {
 				case StateManagerScript.state.idle://相手が「idle」だっったら
-					mySMS.Bind_S ();//自分を「bind_s」状態に
+					SMS.ForceCheck ();
+					oppanim.SetBool ("Check", true);
 					myanim.SetBool("Snake",false);
 					Debug.Log ("OK");
 					break;

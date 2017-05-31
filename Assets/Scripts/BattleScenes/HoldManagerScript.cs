@@ -29,10 +29,10 @@ public class HoldManagerScript : StateManagerScript {
 	private StateManagerScript SMS_1P;
 	private StateManagerScript SMS_2P;
 
-	private PlayerHPScript PHPS_1P;
-	private PlayerHPScript PHPS_2P;
+	//private PlayerHPScript PHPS_1P;
+	//private PlayerHPScript PHPS_2P;
 
-	private float timer = 10.0f;
+	private float holdtimer = 10.0f;
 
 
 	// Use this for initialization
@@ -44,8 +44,8 @@ public class HoldManagerScript : StateManagerScript {
 		SMS_1P = player1.GetComponent<StateManagerScript> ();
 		SMS_2P = player2.GetComponent<StateManagerScript> ();
 
-		PHPS_1P = player1.GetComponent<PlayerHPScript> ();
-		PHPS_2P = player2.GetComponent<PlayerHPScript> ();
+		//PHPS_1P = player1.GetComponent<PlayerHPScript> ();
+		//PHPS_2P = player2.GetComponent<PlayerHPScript> ();
 
 		counttext = count.GetComponent<Text> ();
 		wintext = win.GetComponent<Text> ();
@@ -66,11 +66,11 @@ public class HoldManagerScript : StateManagerScript {
 			SMS_1P.nowstate == state.hold_s) {
 
 			count.SetActive (true);
-			counttext.text = timer.ToString ("f0");
+			counttext.text = holdtimer.ToString ("f0");
 
 			Resist_2P ();// ぐるぐる入力を取る関数
 
-			timer -= Time.deltaTime;
+			holdtimer -= Time.deltaTime;
 
 			int release = 30;//ぐるぐる入力による解除の閾値
 
@@ -110,7 +110,7 @@ public class HoldManagerScript : StateManagerScript {
 
 				escape = 0;
 
-				timer = 10.0f;
+				holdtimer = 10.0f;
 				count.SetActive (false);
 			}
 
@@ -120,8 +120,8 @@ public class HoldManagerScript : StateManagerScript {
 			}
 
 			//10秒経過で勝利
-			if (timer <= 0.0f) {
-				timer = 0;
+			if (holdtimer <= 0.0f) {
+				holdtimer = 0;
 				win.SetActive (true);
 				wintext.text = "1P WIN!";
 				if (Input.anyKeyDown) {
@@ -144,9 +144,9 @@ public class HoldManagerScript : StateManagerScript {
 			Resist_1P ();// ぐるぐる入力を取る関数
 
 			count.SetActive (true);
-			counttext.text = timer.ToString ("f0");
+			counttext.text = holdtimer.ToString ("f0");
 
-			timer -= Time.deltaTime;
+			holdtimer -= Time.deltaTime;
 
 			int release = 30;//ぐるぐる入力による解除の閾値
 
@@ -183,7 +183,7 @@ public class HoldManagerScript : StateManagerScript {
 
 				escape = 0;
 
-				timer = 10.0f;
+				holdtimer = 10.0f;
 				count.SetActive (false);
 			}
 
@@ -193,8 +193,8 @@ public class HoldManagerScript : StateManagerScript {
 			}
 
 			//10秒経過で勝利
-			if (timer <= 0.0f) {
-				timer = 0;
+			if (holdtimer <= 0.0f) {
+				holdtimer = 0;
 				win.SetActive (true);
 				wintext.text = "2P WIN!";
 				if (Input.anyKeyDown) {

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class StateManagerScript : MonoBehaviour {
 
 	public enum state {
-		idle, guard, check, attack, snake, bind_s, bind_l, hold_s, hold_m, hold_l, held_s, held_m, held_l
+		idle, guard, check, attack, snake, bind_s, bind_l, hold_s, hold_m, hold_l, held_s, held_m, held_l,force_check
 	}
 
 	public Text STATE;
@@ -43,6 +43,10 @@ public class StateManagerScript : MonoBehaviour {
 
 		STATE.text = nowstate.ToString();
 
+		BindReset ();
+
+		ForceCheckReset ();
+
 		Reset_to_Idle ();
 
 	}
@@ -59,6 +63,16 @@ public class StateManagerScript : MonoBehaviour {
 		}
 	}
 
+	private void ForceCheckReset(){
+		if (nowstate == state.force_check) {
+			timer += Time.deltaTime;
+			if (timer >= 1.5f) {
+				Idle ();
+				timer = 0;
+			}
+		}
+	}
+
 
 
 
@@ -68,7 +82,7 @@ public class StateManagerScript : MonoBehaviour {
 		if (nowstate == state.bind_s) {
 			timer += Time.deltaTime;
 			if (timer >= bindtime_short) {
-				nowstate = state.idle;
+				Idle ();
 				timer = 0;
 			}
 		}
@@ -76,7 +90,7 @@ public class StateManagerScript : MonoBehaviour {
 		if (nowstate == state.bind_l) {
 			timer += Time.deltaTime;
 			if (timer >= bindtime_long) {
-				nowstate = state.idle;
+				Idle ();
 				timer = 0;
 			}
 		}
@@ -117,9 +131,22 @@ public class StateManagerScript : MonoBehaviour {
 		nowstate = state.bind_l;
 	}
 
+	public void ForceCheck(){
+		nowstate = state.force_check;
+	}
+
 	//Idle状態に戻す
 	public void Idle(){
 		nowstate = state.idle;
+
+		//---------- Animatorの管理
+		Transform myhand = transform.FindChild("Hand_Model");
+		Animator myanim = myhand.gameObject.GetComponent<Animator> ();
+		myanim.SetBool ("Hold",false);
+		myanim.SetBool ("Guard",false);
+		myanim.SetBool ("Check",false);
+		myanim.SetBool ("Attack",false);
+		myanim.SetBool ("Snake",false);
 	}
 
 	//一秒後にidleに戻す（仮）
