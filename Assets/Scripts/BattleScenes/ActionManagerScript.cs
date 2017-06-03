@@ -7,11 +7,12 @@ public class ActionManagerScript : MonoBehaviour {
 	private GameObject player1;
 	private GameObject player2;
 
+	private StateManagerScript SMS1;
+	private StateManagerScript SMS2;
+
 	public float distance;//1Pと2Pの距離を入れる変数
 
 	private bool touched = false;
-
-	private bool attack = false;
 
 	private const float action_range = 2.3f;//攻撃等が行える距離の上限、定数
 
@@ -19,6 +20,8 @@ public class ActionManagerScript : MonoBehaviour {
 	void Start () {
 		player1 = GameObject.Find ("1P_Manager");
 		player2 = GameObject.Find ("2P_Manager");
+		SMS1 = player1.GetComponent<StateManagerScript> ();
+		SMS2 = player2.GetComponent<StateManagerScript> ();
 
 	}
 	
@@ -26,6 +29,17 @@ public class ActionManagerScript : MonoBehaviour {
 	void Update () {
 		distance = Mathf.Abs( player2.transform.position.x - player1.transform.position.x);
 		//Debug.Log ("Distance =" + distance);
+
+		if (SMS1.nowstate == StateManagerScript.state.attack) {
+			if (touched = true) {
+				Attack_Process (player2,player1);
+			}
+		}
+		if (SMS2.nowstate == StateManagerScript.state.attack) {
+			if (touched = true) {
+				Attack_Process (player1,player2);
+			}
+		}
 
 
 	}
@@ -83,8 +97,6 @@ public class ActionManagerScript : MonoBehaviour {
 
 			mySMS.Attack ();
 
-			Attack_Process (opponent, myself);
-
 
 			//仮
 			//---------- Animatorの管理
@@ -108,7 +120,7 @@ public class ActionManagerScript : MonoBehaviour {
 		//---------- Animatorの管理
 		Transform myhand = myself.transform.FindChild("Hand_Model");
 		Animator myanim = myhand.gameObject.GetComponent<Animator> ();
-		myanim.SetBool ("Attack", true);
+		//myanim.SetBool ("Attack", true);
 
 		//---------- 相手のAnimator
 		Transform opphand = opponent.transform.FindChild("Hand_Model");
@@ -118,6 +130,7 @@ public class ActionManagerScript : MonoBehaviour {
 			switch (SMS.nowstate) {
 			case StateManagerScript.state.idle://相手が「idle」だっったら
 				mySMS.Bind_S ();//自分を「bind_s」状態に
+				myanim.SetBool("Bind",true);
 				myanim.SetBool("Attack",false);
 				break;
 			case StateManagerScript.state.guard://相手が「guard」だっったら
@@ -132,6 +145,11 @@ public class ActionManagerScript : MonoBehaviour {
 				myanim.SetBool("Hold",true);
 
 				PHPS.Damage_M ();//相手にダメージ（中）を与える
+				break;
+			case StateManagerScript.state.attack://相手が「attack」だっったら
+				player1.transform.position = Vector3.Lerp(player1.transform.position,new Vector3(-5,0,0),0.5f);//仕切り直し
+				player2.transform.position = Vector3.Lerp(player2.transform.position,new Vector3(5,0,0),0.5f);//仕切り直し
+				myanim.SetBool("Attack",false);
 				break;
 			case StateManagerScript.state.bind_l://相手が「bind_l」だっったら
 
