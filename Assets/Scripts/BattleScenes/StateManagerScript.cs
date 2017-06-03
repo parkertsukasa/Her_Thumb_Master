@@ -53,7 +53,6 @@ public class StateManagerScript : MonoBehaviour {
 
 	//---------- Animation再生終了後にIdleに戻す
 	private void Reset_to_Idle(){
-		//Debug.Log (anim.GetCurrentAnimatorStateInfo(0).normalizedTime );
 		if(nowstate == state.attack || nowstate == state.snake){
 			if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f){
 				nowstate = state.idle;
@@ -147,6 +146,7 @@ public class StateManagerScript : MonoBehaviour {
 		myanim.SetBool ("Check",false);
 		myanim.SetBool ("Attack",false);
 		myanim.SetBool ("Snake",false);
+		myanim.SetBool ("Bind", false);
 	}
 
 	//一秒後にidleに戻す（仮）

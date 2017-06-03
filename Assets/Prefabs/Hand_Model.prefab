@@ -80,9 +80,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4076960681891156}
   - component: {fileID: 136383553787136942}
+  - component: {fileID: 114475364511989982}
   m_Layer: 0
   m_Name: joint25
-  m_TagString: Untagged
+  m_TagString: Finger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -683,7 +684,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1681706743818322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4891794370855524}
@@ -871,6 +872,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114475364511989982
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1201928280939334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789a2bf94b3284b52892f932d1e95cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136383553787136942
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -878,10 +890,10 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1201928280939334}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5408685
-  m_Height: 1.6558524
+  m_Radius: 0.25
+  m_Height: 1.7
   m_Direction: 0
   m_Center: {x: 0, y: -0.27, z: 0}
 --- !u!137 &137536883610258186

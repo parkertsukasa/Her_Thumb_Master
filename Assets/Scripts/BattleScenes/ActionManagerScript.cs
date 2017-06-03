@@ -11,6 +11,8 @@ public class ActionManagerScript : MonoBehaviour {
 
 	private bool touched = false;
 
+	private bool attack = false;
+
 	private const float action_range = 2.3f;//攻撃等が行える距離の上限、定数
 
 	// Use this for initialization
@@ -23,7 +25,9 @@ public class ActionManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		distance = Mathf.Abs( player2.transform.position.x - player1.transform.position.x);
-		Debug.Log ("Distance =" + distance);
+		//Debug.Log ("Distance =" + distance);
+
+
 	}
 
 	public void Touched(){
@@ -72,64 +76,83 @@ public class ActionManagerScript : MonoBehaviour {
 
 	//InputManagerScriptから×ボタン入力時に第1引数に[相手]を第2引数に[自分]を渡して呼び出す
 	public void Attack(GameObject opponent, GameObject myself) {
-		StateManagerScript SMS = opponent.GetComponent<StateManagerScript> ();
 		StateManagerScript mySMS = myself.GetComponent<StateManagerScript> ();
-		PlayerHPScript PHPS = opponent.GetComponent<PlayerHPScript> ();
 
 		if (mySMS.nowstate == StateManagerScript.state.idle) {//idle状態のみ有効（連打の防止）
+			
+
+			mySMS.Attack ();
+
+			Attack_Process (opponent, myself);
+
+
+			//仮
 			//---------- Animatorの管理
 			Transform myhand = myself.transform.FindChild("Hand_Model");
 			Animator myanim = myhand.gameObject.GetComponent<Animator> ();
 			myanim.SetBool ("Attack", true);
 
-			//---------- 相手のAnimator
-			Transform opphand = opponent.transform.FindChild("Hand_Model");
-			Animator oppanim = opphand.gameObject.GetComponent<Animator> ();
 
-			mySMS.Attack ();
+		}
+	}
+
+	public void Attack_Process(GameObject opponent, GameObject myself){
 
 
-			//---------- 相手に応じた処理
-			if (touched == true) {//指先のコライダー同士が触れていたら
-				switch (SMS.nowstate) {
-				case StateManagerScript.state.idle://相手が「idle」だっったら
-					mySMS.Bind_S ();//自分を「bind_s」状態に
-					myanim.SetBool("Attack",false);
-					break;
-				case StateManagerScript.state.guard://相手が「guard」だっったら
-					mySMS.Bind_S ();//自分を「bind_s」状態に
-					myanim.SetBool("Attack",false);
-					break;
-				case StateManagerScript.state.check://相手が「check」だっったら
-					SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
-					oppanim.SetInteger("Held_State",1);
+		if (touched == true) {//指先のコライダー同士が触れていたら
 
-					mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
-					myanim.SetBool("Hold",true);
+		StateManagerScript SMS = opponent.GetComponent<StateManagerScript> ();
+		StateManagerScript mySMS = myself.GetComponent<StateManagerScript> ();
+		PlayerHPScript PHPS = opponent.GetComponent<PlayerHPScript> ();
 
-					PHPS.Damage_M ();//相手にダメージ（中）を与える
-					break;
-				case StateManagerScript.state.bind_l://相手が「bind_l」だっったら
+		//---------- Animatorの管理
+		Transform myhand = myself.transform.FindChild("Hand_Model");
+		Animator myanim = myhand.gameObject.GetComponent<Animator> ();
+		myanim.SetBool ("Attack", true);
 
-					SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
-					oppanim.SetInteger("Held_State",1);
+		//---------- 相手のAnimator
+		Transform opphand = opponent.transform.FindChild("Hand_Model");
+		Animator oppanim = opphand.gameObject.GetComponent<Animator> ();
 
-					mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
-					myanim.SetBool("Hold",true);
 
-					PHPS.Damage_M ();//相手にダメージ（中）を与える
-					break;
-				case StateManagerScript.state.bind_s://相手が「bind_s」だっったら
+			switch (SMS.nowstate) {
+			case StateManagerScript.state.idle://相手が「idle」だっったら
+				mySMS.Bind_S ();//自分を「bind_s」状態に
+				myanim.SetBool("Attack",false);
+				break;
+			case StateManagerScript.state.guard://相手が「guard」だっったら
+				mySMS.Bind_S ();//自分を「bind_s」状態に
+				myanim.SetBool("Attack",false);
+				break;
+			case StateManagerScript.state.check://相手が「check」だっったら
+				SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
+				oppanim.SetInteger("Held_State",1);
 
-					SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
-					oppanim.SetInteger("Held_State",1);
+				mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
+				myanim.SetBool("Hold",true);
 
-					mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
-					myanim.SetBool("Hold",true);
+				PHPS.Damage_M ();//相手にダメージ（中）を与える
+				break;
+			case StateManagerScript.state.bind_l://相手が「bind_l」だっったら
 
-					PHPS.Damage_M ();//相手にダメージ（中）を与える
-					break;
-				}
+				SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
+				oppanim.SetInteger("Held_State",1);
+
+				mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
+				myanim.SetBool("Hold",true);
+
+				PHPS.Damage_M ();//相手にダメージ（中）を与える
+				break;
+			case StateManagerScript.state.bind_s://相手が「bind_s」だっったら
+
+				SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
+				oppanim.SetInteger("Held_State",1);
+
+				mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
+				myanim.SetBool("Hold",true);
+
+				PHPS.Damage_M ();//相手にダメージ（中）を与える
+				break;
 			}
 		}
 	}

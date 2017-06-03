@@ -204,8 +204,9 @@ public class HoldManagerScript : StateManagerScript {
 
 			}
 		}
-
 	}
+
+
 
 	//----------- ぐるぐる入力のカウント(1P用)
 	public void Resist_1P(){
