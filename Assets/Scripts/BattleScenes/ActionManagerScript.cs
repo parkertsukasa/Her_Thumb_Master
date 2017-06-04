@@ -12,7 +12,7 @@ public class ActionManagerScript : MonoBehaviour {
 
 	public float distance;//1Pと2Pの距離を入れる変数
 
-	private bool touched = false;
+	public bool touched = false;
 
 	private const float action_range = 2.3f;//攻撃等が行える距離の上限、定数
 
@@ -31,16 +31,13 @@ public class ActionManagerScript : MonoBehaviour {
 		//Debug.Log ("Distance =" + distance);
 
 		if (SMS1.nowstate == StateManagerScript.state.attack) {
-			if (touched = true) {
 				Attack_Process (player2,player1);
-			}
 		}
 		if (SMS2.nowstate == StateManagerScript.state.attack) {
-			if (touched = true) {
 				Attack_Process (player1,player2);
-			}
 		}
 
+		Debug.Log (touched);
 
 	}
 
@@ -51,6 +48,22 @@ public class ActionManagerScript : MonoBehaviour {
 	public void Released(){
 		touched = false;
 	}
+
+	//attackをfalseにする前にbindをtrueにするコルーチン------------------------------------------------------------------
+
+	private IEnumerator BindTrue_before_AttackFalse(GameObject myself){
+
+		//---------- Animatorの管理
+		Transform myhand = myself.transform.FindChild("Hand_Model");
+		Animator myanim = myhand.gameObject.GetComponent<Animator> ();
+
+		yield return new WaitForSeconds(0.1f);;
+
+		myanim.SetBool("Attack",false);
+
+	}
+
+	//--------------------------------------------------------------------------------------------------------------
 
 	//InputManagerScriptから□ボタン入力時に第1引数に[相手]を第2引数に[自分]を引数にして呼び出す
 	public void Guard(GameObject opponent,GameObject myself) {
@@ -90,6 +103,7 @@ public class ActionManagerScript : MonoBehaviour {
 
 	//InputManagerScriptから×ボタン入力時に第1引数に[相手]を第2引数に[自分]を渡して呼び出す
 	public void Attack(GameObject opponent, GameObject myself) {
+		
 		StateManagerScript mySMS = myself.GetComponent<StateManagerScript> ();
 
 		if (mySMS.nowstate == StateManagerScript.state.idle) {//idle状態のみ有効（連打の防止）
@@ -130,8 +144,11 @@ public class ActionManagerScript : MonoBehaviour {
 			switch (SMS.nowstate) {
 			case StateManagerScript.state.idle://相手が「idle」だっったら
 				mySMS.Bind_S ();//自分を「bind_s」状態に
+
 				myanim.SetBool("Bind",true);
-				myanim.SetBool("Attack",false);
+
+				StartCoroutine( "BindTrue_before_AttackFalse" , myself);
+				 
 				break;
 			case StateManagerScript.state.guard://相手が「guard」だっったら
 				mySMS.Bind_S ();//自分を「bind_s」状態に
