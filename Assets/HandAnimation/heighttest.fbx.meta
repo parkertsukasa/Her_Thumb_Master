@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b8205675605a74a7db09eda9c26fb4be
-timeCreated: 1495114947
+guid: 41c7011308402433bb9eed820e4cf353
+timeCreated: 1496630425
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -34,6 +34,7 @@ ModelImporter:
     100052: joint7
     100054: joint8
     100056: joint9
+    100058: locator1
     400000: hand01:pCube6
     400002: //RootNode
     400004: joint1
@@ -63,6 +64,7 @@ ModelImporter:
     400052: joint7
     400054: joint8
     400056: joint9
+    400058: locator1
     4300000: hand01:pCube6
     7400000: Take 001
     9500000: //RootNode
@@ -91,15 +93,15 @@ ModelImporter:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
-      firstFrame: 28
-      lastFrame: 30
+      firstFrame: 0
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -171,6 +173,8 @@ ModelImporter:
         weight: 1
       - path: joint1/joint27/joint23/joint24/joint25/joint26
         weight: 1
+      - path: locator1
+        weight: 1
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
@@ -197,7 +201,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     serializedVersion: 2
     human: []
@@ -214,8 +218,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: fc61035cb906340ee96809336e380856,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0

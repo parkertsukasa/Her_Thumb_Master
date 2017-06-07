@@ -126,11 +126,15 @@ public class InputManagerScript : MonoBehaviour {
 			AMS.Check (player1, player2);
 		}
 		if (Input.GetButtonUp ("1P_Triangle") || Input.GetKeyUp(KeyCode.W) ) {
+			if(SMS_1P.nowstate == StateManagerScript.state.check){
 			SMS_1P.Idle ();
+		}
 			AMS.Exit_from_Check (player2, player1);
 		}
 		if (Input.GetButtonUp ("2P_Triangle")) {
-			SMS_2P.Idle ();
+			if (SMS_2P.nowstate == StateManagerScript.state.check) {
+				SMS_2P.Idle ();
+			}
 			AMS.Exit_from_Check (player1, player2);
 		}
 	}
