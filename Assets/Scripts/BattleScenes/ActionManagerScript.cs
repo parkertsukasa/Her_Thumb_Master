@@ -166,8 +166,8 @@ public class ActionManagerScript : MonoBehaviour {
 				PHPS.Damage_M ();//相手にダメージ（中）を与える
 				break;
 			case StateManagerScript.state.attack://相手が「attack」だっったら
-				player1.transform.position = Vector3.Lerp(player1.transform.position,new Vector3(-5,0,0),1.0f);//仕切り直し
-				player2.transform.position = Vector3.Lerp(player2.transform.position,new Vector3(5,0,0),1.0f);//仕切り直し
+				player1.transform.position = Vector3.Lerp(player1.transform.position,new Vector3(-5,0,0),3.0f);//仕切り直し
+				player2.transform.position = Vector3.Lerp(player2.transform.position,new Vector3(5,0,0),3.0f);//仕切り直し
 				myanim.SetBool("Attack",false);
 				break;
 			case StateManagerScript.state.bind_l://相手が「bind_l」だっったら

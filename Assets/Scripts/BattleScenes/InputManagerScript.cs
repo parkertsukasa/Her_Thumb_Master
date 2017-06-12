@@ -20,6 +20,22 @@ public class InputManagerScript : MonoBehaviour {
 	private float jchrzn_1p;//Switch用
 	private float jchrzn_2p;//Switch用
 
+	private float r2_1p;
+	private bool r2pushed_1p = false;
+	private bool r2_1p_canpush = true;
+
+	private float r2_2p;
+	private bool r2pushed_2p = false;
+	private bool r2_2p_canpush = true;
+
+	private float l2_1p;
+	private bool l2pushed_1p = false;
+	private bool l2_1p_canpush = true;
+
+	private float l2_2p;
+	private bool l2pushed_2p = false;
+	private bool l2_2p_canpush = true;
+
 	// Use this for initialization
 	void Start () {
 		player1 = GameObject.Find ("1P_Manager");
@@ -40,6 +56,80 @@ public class InputManagerScript : MonoBehaviour {
 
 		jchrzn_1p = Input.GetAxis ("JoyCon1_Horizontal");
 		jchrzn_2p = Input.GetAxis ("JoyCon2_Horizontal");
+
+		r2_1p = Input.GetAxis ("1P_R2");
+		r2_2p = Input.GetAxis ("2P_R2");
+
+		l2_1p = Input.GetAxis ("1P_L2");
+		l2_2p = Input.GetAxis ("2P_L2");
+
+
+		//---------- 1PのR2が押された時 ----------
+		if (r2_1p > 0.5f) {
+			if (r2_1p_canpush == true) {
+				r2pushed_1p = true;
+				r2_1p_canpush = false;
+			}
+		}
+		if (r2_1p < 0.0f) {
+			r2_1p_canpush = true;
+		}
+
+		if (r2pushed_1p == true) {
+			AMS.Snake (player2, player1);//Snake
+			r2pushed_1p = false;
+		}
+
+		//---------- 2PのR2が押された時 ----------
+		if (r2_2p > 0.5f) {
+			if (r2_2p_canpush == true) {
+				r2pushed_2p = true;
+				r2_2p_canpush = false;
+			}
+		}
+		if (r2_2p < 0.0f) {
+			r2_2p_canpush = true;
+		}
+
+		if (r2pushed_2p == true) {
+			AMS.Snake (player1, player2);//Snake
+			r2pushed_2p = false;
+		}
+
+
+		//---------- 1PのL2が押された時 ----------
+		if (l2_1p > 0.5f) {
+			if (l2_1p_canpush == true) {
+				l2pushed_1p = true;
+				l2_1p_canpush = false;
+			}
+		}
+		if (l2_1p < 0.0f) {
+			l2_1p_canpush = true;
+		}
+
+		if (l2pushed_1p == true) {
+			//処理
+			l2pushed_1p = false;
+		}
+
+		//---------- 2PのL2が押された時 ----------
+		if (l2_2p > 0.5f) {
+			if (l2_2p_canpush == true) {
+				l2pushed_2p = true;
+				l2_2p_canpush = false;
+			}
+		}
+		if (l2_2p < 0.0f) {
+			l2_2p_canpush = true;
+		}
+
+		if (l2pushed_2p == true) {
+			//処理
+			l2pushed_2p = false;
+		}
+
+
 
 
 
@@ -82,11 +172,11 @@ public class InputManagerScript : MonoBehaviour {
 		//----- ○ボタン
 		if (Input.GetButtonDown ("1P_Circle") || Input.GetKeyDown(KeyCode.D)) {
 			//SMS_1P.Snake ();
-			AMS.Snake (player2, player1);
+			//AMS.Snake (player2, player1);
 		}
 		if (Input.GetButtonDown ("2P_Circle")) {
 			//SMS_2P.Snake ();
-			AMS.Snake (player1, player2);
+			//AMS.Snake (player1, player2);
 		}
 
 

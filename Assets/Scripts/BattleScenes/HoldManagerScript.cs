@@ -182,8 +182,8 @@ public class HoldManagerScript : StateManagerScript {
 				anim2.SetBool ("Attack", false);
 				anim2.SetBool ("Hold", false);
 
-				player1.transform.position = Vector3.Lerp(player1.transform.position,new Vector3(-5,0,0),1.0f);//仕切り直し
-				player2.transform.position = Vector3.Lerp(player2.transform.position,new Vector3(5,0,0),1.0f);//仕切り直し
+				player1.transform.position = Vector3.Lerp(player1.transform.position,new Vector3(-5,0,0),3.0f);//仕切り直し
+				player2.transform.position = Vector3.Lerp(player2.transform.position,new Vector3(5,0,0),3.0f);//仕切り直し
 
 				SMS_1P.nowstate = state.idle;
 				SMS_2P.nowstate = state.idle;
