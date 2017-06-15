@@ -109,7 +109,10 @@ public class InputManagerScript : MonoBehaviour {
 		}
 
 		if (l2pushed_1p == true) {
-			//処理
+
+			HissatsuWazaScript HWS = player1.GetComponent<HissatsuWazaScript> ();
+			HWS.Runch ();
+
 			l2pushed_1p = false;
 		}
 
@@ -125,7 +128,10 @@ public class InputManagerScript : MonoBehaviour {
 		}
 
 		if (l2pushed_2p == true) {
-			//処理
+
+			HissatsuWazaScript HWS = player2.GetComponent<HissatsuWazaScript> ();
+			HWS.Runch ();
+
 			l2pushed_2p = false;
 		}
 
@@ -171,12 +177,10 @@ public class InputManagerScript : MonoBehaviour {
 		//-----------攻撃等のアクション------------------------------------
 		//----- ○ボタン
 		if (Input.GetButtonDown ("1P_Circle") || Input.GetKeyDown(KeyCode.D)) {
-			//SMS_1P.Snake ();
-			//AMS.Snake (player2, player1);
+			AMS.Pistol (player2, player1,1);
 		}
 		if (Input.GetButtonDown ("2P_Circle")) {
-			//SMS_2P.Snake ();
-			//AMS.Snake (player1, player2);
+			AMS.Pistol (player1, player2,2);
 		}
 
 

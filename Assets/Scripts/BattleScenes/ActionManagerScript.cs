@@ -16,6 +16,10 @@ public class ActionManagerScript : MonoBehaviour {
 
 	private const float action_range = 2.3f;//攻撃等が行える距離の上限、定数
 
+
+	public GameObject tsume_1p;//Pistolで発射する爪
+	public GameObject tsume_2p;//Pistolで発射する爪
+
 	// Use this for initialization
 	void Start () {
 		player1 = GameObject.Find ("1P_Manager");
@@ -35,6 +39,13 @@ public class ActionManagerScript : MonoBehaviour {
 		}
 		if (SMS2.nowstate == StateManagerScript.state.attack) {
 				Attack_Process (player1,player2);
+		}
+
+		if (SMS1.nowstate == StateManagerScript.state.snake) {
+			//Snake_Process (player2,player1);
+		}
+		if (SMS2.nowstate == StateManagerScript.state.snake) {
+			//Snake_Process (player1,player2);
 		}
 
 		Debug.Log (touched);
@@ -214,12 +225,7 @@ public class ActionManagerScript : MonoBehaviour {
 	}
 
 	//---------- Snakeの処理
-	private void SnakeProcess(GameObject opponent, GameObject myself){
-
-		Transform indexfinger = myself.transform.FindChild ("joint22");
-		IndexFingerScript IFS = indexfinger.gameObject.GetComponent<IndexFingerScript> ();
-
-		if (IFS.cansnake == true) {
+	private void Snake_Process(GameObject opponent, GameObject myself){
 
 			StateManagerScript SMS = opponent.GetComponent<StateManagerScript> ();
 			StateManagerScript mySMS = myself.GetComponent<StateManagerScript> ();
@@ -235,7 +241,12 @@ public class ActionManagerScript : MonoBehaviour {
 			Animator oppanim = opphand.gameObject.GetComponent<Animator> ();
 
 
-			if (touched == true) {//指先のコライダー同士が触れていたら
+			Transform indexfinger = myself.transform.FindChild ("joint22");
+			IndexFingerScript IFS = indexfinger.gameObject.GetComponent<IndexFingerScript> ();
+
+			if (IFS.cansnake == true) {
+
+			//if (touched == true) {//指先のコライダー同士が触れていたら
 
 				switch (SMS.nowstate) {
 				case StateManagerScript.state.idle://相手が「idle」だっったら
@@ -278,9 +289,24 @@ public class ActionManagerScript : MonoBehaviour {
 
 					PHPS.Damage_L ();//相手にダメージ（大）を与える
 					break;
-				}
+				//}
 			}
 		}
 	}
 
+	//---------- Pistolの発射 ----------
+	public void Pistol(GameObject opponent, GameObject myself,int p){
+		Transform myhand = myself.transform.FindChild ("Hand_Model");
+		Animator myanim = myhand.GetComponent<Animator> ();
+		StateManagerScript mySMS = myself.GetComponent<StateManagerScript> ();
+
+		myanim.SetBool ("Pistol", true);//animatorをpistolに
+		mySMS.Pistol();//StateをPistolに
+		if(p == 1){
+			Instantiate(tsume_1p,myself.transform.position,Quaternion.identity);//爪を生成
+		}
+		if (p == 2) {
+			Instantiate(tsume_2p,myself.transform.position,Quaternion.identity);//爪を生成
+		}
+	}
 }

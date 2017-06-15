@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class StateManagerScript : MonoBehaviour {
 
 	public enum state {
-		idle, guard, check, attack, snake, bind_s, bind_l, hold_s, hold_m, hold_l, held_s, held_m, held_l,force_check
+		idle, guard, check, attack, snake, bind_s, bind_l, hold_s, hold_m, hold_l, held_s, held_m, held_l,force_check,pistol,hissatsu
 	}
 
 	public Text STATE;
@@ -53,11 +53,13 @@ public class StateManagerScript : MonoBehaviour {
 
 	//---------- Animation再生終了後にIdleに戻す
 	private void Reset_to_Idle(){
-		if(nowstate == state.attack || nowstate == state.snake){
+		if(nowstate == state.attack || nowstate == state.snake || nowstate == state.pistol || nowstate == state.hissatsu){
 			if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f){
 				nowstate = state.idle;
 				anim.SetBool ("Attack", false);
 				anim.SetBool ("Snake", false);
+				anim.SetBool ("Pistol", false);
+				anim.SetBool ("Hissatsu", false);
 			}
 		}
 	}
@@ -93,11 +95,7 @@ public class StateManagerScript : MonoBehaviour {
 				timer = 0;
 			}
 		}
-
-		//idle_dushの解除
-		if (runstate == move_state.idle_dush) {
-			Invoke ("StateReset", 0.3f);
-		}
+			
 	}
 
 	//InputManagerScriptから□ボタン入力時に呼び出す
@@ -134,6 +132,14 @@ public class StateManagerScript : MonoBehaviour {
 		nowstate = state.force_check;
 	}
 
+	public void Pistol(){
+		nowstate = state.pistol;
+	}
+
+	public void Hissatsu(){
+		nowstate = state.hissatsu;
+	}
+
 	//Idle状態に戻す
 	public void Idle(){
 		nowstate = state.idle;
@@ -148,11 +154,5 @@ public class StateManagerScript : MonoBehaviour {
 		myanim.SetBool ("Snake",false);
 		myanim.SetBool ("Bind", false);
 	}
-
-	//一秒後にidleに戻す（仮）
-	public void Idle_one_seconds_after(){
-		Invoke ("Idle", 1.0f);
-	}
-
-
+		
 }
