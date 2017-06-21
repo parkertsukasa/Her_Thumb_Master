@@ -10,8 +10,6 @@ public class ActionManagerScript : MonoBehaviour {
 	private StateManagerScript SMS1;
 	private StateManagerScript SMS2;
 
-	public float distance;//1Pと2Pの距離を入れる変数
-
 	public bool touched = false;
 
 	private const float action_range = 2.3f;//攻撃等が行える距離の上限、定数
@@ -31,9 +29,7 @@ public class ActionManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		distance = Mathf.Abs( player2.transform.position.x - player1.transform.position.x);
-		//Debug.Log ("Distance =" + distance);
-
+		
 		if (SMS1.nowstate == StateManagerScript.state.attack) {
 				Attack_Process (player2,player1);
 		}
@@ -296,17 +292,21 @@ public class ActionManagerScript : MonoBehaviour {
 
 	//---------- Pistolの発射 ----------
 	public void Pistol(GameObject opponent, GameObject myself,int p){
+
 		Transform myhand = myself.transform.FindChild ("Hand_Model");
 		Animator myanim = myhand.GetComponent<Animator> ();
 		StateManagerScript mySMS = myself.GetComponent<StateManagerScript> ();
 
-		myanim.SetBool ("Pistol", true);//animatorをpistolに
-		mySMS.Pistol();//StateをPistolに
-		if(p == 1){
-			Instantiate(tsume_1p,myself.transform.position,Quaternion.identity);//爪を生成
-		}
-		if (p == 2) {
-			Instantiate(tsume_2p,myself.transform.position,Quaternion.identity);//爪を生成
+		if (mySMS.nowstate == StateManagerScript.state.idle) {
+
+			myanim.SetBool ("Pistol", true);//animatorをpistolに
+			mySMS.Pistol ();//StateをPistolに
+			if (p == 1) {
+				Instantiate (tsume_1p, myself.transform.position, Quaternion.identity);//爪を生成
+			}
+			if (p == 2) {
+				Instantiate (tsume_2p, myself.transform.position, Quaternion.identity);//爪を生成
+			}
 		}
 	}
 }

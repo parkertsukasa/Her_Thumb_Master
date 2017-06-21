@@ -116,6 +116,12 @@ public class InputManagerScript : MonoBehaviour {
 			l2pushed_1p = false;
 		}
 
+		//----------- デバッグ用 ----------
+		if (Input.GetKeyDown (KeyCode.H)) {
+			HissatsuWazaScript HWS = player1.GetComponent<HissatsuWazaScript> ();
+			HWS.Runch ();
+		}
+
 		//---------- 2PのL2が押された時 ----------
 		if (l2_2p > 0.5f) {
 			if (l2_2p_canpush == true) {
