@@ -108,7 +108,7 @@ public class InputManagerScript : MonoBehaviour {
 			l2_1p_canpush = true;
 		}
 
-		if (l2pushed_1p == true) {
+		if (l2pushed_1p == true || Input.GetKeyDown(KeyCode.L)) {
 
 			HissatsuWazaScript HWS = player1.GetComponent<HissatsuWazaScript> ();
 			HWS.Runch ();
@@ -185,7 +185,7 @@ public class InputManagerScript : MonoBehaviour {
 		if (Input.GetButtonDown ("1P_Circle") || Input.GetKeyDown(KeyCode.D)) {
 			AMS.Pistol (player2, player1,1);
 		}
-		if (Input.GetButtonDown ("2P_Circle")) {
+		if (Input.GetButtonDown ("2P_Circle") || Input.GetKeyDown(KeyCode.H)) {
 			AMS.Pistol (player1, player2,2);
 		}
 
@@ -194,14 +194,14 @@ public class InputManagerScript : MonoBehaviour {
 		if (Input.GetButtonDown ("1P_Square") || Input.GetKeyDown(KeyCode.A)) {
 			AMS.Guard (player2, player1);
 		}
-		if (Input.GetButtonDown ("2P_Square")) {
+		if (Input.GetButtonDown ("2P_Square")|| Input.GetKeyDown(KeyCode.F)) {
 			AMS.Guard (player1, player2);
 		}
 		if (Input.GetButtonUp ("1P_Square")|| Input.GetKeyUp(KeyCode.A)) {
 			SMS_1P.Idle ();
 			AMS.Exit_from_Guard (player2, player1);
 		}
-		if (Input.GetButtonUp ("2P_Square")) {
+		if (Input.GetButtonUp ("2P_Square")|| Input.GetKeyUp(KeyCode.F)) {
 			SMS_2P.Idle ();
 			AMS.Exit_from_Guard (player1, player2);
 		}
@@ -212,7 +212,7 @@ public class InputManagerScript : MonoBehaviour {
 			//SMS_1P.Attack ();
 			AMS.Attack (player2, player1);
 		}
-		if (Input.GetButtonDown ("2P_Cross")) {
+		if (Input.GetButtonDown ("2P_Cross")|| Input.GetKeyDown(KeyCode.G)) {
 			//SMS_2P.Attack ();
 			AMS.Attack (player1, player2);
 		}
@@ -222,7 +222,7 @@ public class InputManagerScript : MonoBehaviour {
 		if (Input.GetButtonDown ("1P_Triangle") || Input.GetKeyDown(KeyCode.W) ){
 			AMS.Check (player2, player1);
 		}
-		if (Input.GetButtonDown ("2P_Triangle")) {
+		if (Input.GetButtonDown ("2P_Triangle")|| Input.GetKeyDown(KeyCode.T)) {
 			AMS.Check (player1, player2);
 		}
 		if (Input.GetButtonUp ("1P_Triangle") || Input.GetKeyUp(KeyCode.W) ) {
@@ -231,7 +231,7 @@ public class InputManagerScript : MonoBehaviour {
 		}
 			AMS.Exit_from_Check (player2, player1);
 		}
-		if (Input.GetButtonUp ("2P_Triangle")) {
+		if (Input.GetButtonUp ("2P_Triangle")|| Input.GetKeyUp(KeyCode.T)) {
 			if (SMS_2P.nowstate == StateManagerScript.state.check) {
 				SMS_2P.Idle ();
 			}

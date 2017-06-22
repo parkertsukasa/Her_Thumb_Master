@@ -18,12 +18,15 @@ public class ActionManagerScript : MonoBehaviour {
 	public GameObject tsume_1p;//Pistolで発射する爪
 	public GameObject tsume_2p;//Pistolで発射する爪
 
+	public GameObject tsumeeffect;
+
 	// Use this for initialization
 	void Start () {
 		player1 = GameObject.Find ("1P_Manager");
 		player2 = GameObject.Find ("2P_Manager");
 		SMS1 = player1.GetComponent<StateManagerScript> ();
 		SMS2 = player2.GetComponent<StateManagerScript> ();
+		//FS = mythumb.GetComponent<FingerScript> ();
 
 	}
 	
@@ -44,7 +47,7 @@ public class ActionManagerScript : MonoBehaviour {
 			//Snake_Process (player1,player2);
 		}
 
-		Debug.Log (touched);
+		//Debug.Log (touched);
 
 	}
 
@@ -140,6 +143,8 @@ public class ActionManagerScript : MonoBehaviour {
 		StateManagerScript mySMS = myself.GetComponent<StateManagerScript> ();
 		PlayerHPScript PHPS = opponent.GetComponent<PlayerHPScript> ();
 
+		AttackEffectScript AFS = myself.GetComponent<AttackEffectScript> ();
+
 		//---------- Animatorの管理
 		Transform myhand = myself.transform.FindChild("Hand_Model");
 		Animator myanim = myhand.gameObject.GetComponent<Animator> ();
@@ -148,6 +153,8 @@ public class ActionManagerScript : MonoBehaviour {
 		//---------- 相手のAnimator
 		Transform opphand = opponent.transform.FindChild("Hand_Model");
 		Animator oppanim = opphand.gameObject.GetComponent<Animator> ();
+
+
 
 
 			switch (SMS.nowstate) {
@@ -161,14 +168,18 @@ public class ActionManagerScript : MonoBehaviour {
 				break;
 			case StateManagerScript.state.guard://相手が「guard」だっったら
 				mySMS.Bind_S ();//自分を「bind_s」状態に
+				AttackEffectScript oppAES = opponent.GetComponent<AttackEffectScript> ();
+				oppAES.GuardEffect_On ();
 				myanim.SetBool("Attack",false);
 				break;
 			case StateManagerScript.state.check://相手が「check」だっったら
 				SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
-				oppanim.SetInteger("Held_State",1);
+				oppanim.SetInteger ("Held_State", 1);
 
 				mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
-				myanim.SetBool("Hold",true);
+				myanim.SetBool ("Hold", true);
+
+				AFS.Call_IF();
 
 				PHPS.Damage_M ();//相手にダメージ（中）を与える
 				break;
@@ -185,6 +196,8 @@ public class ActionManagerScript : MonoBehaviour {
 				mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
 				myanim.SetBool("Hold",true);
 
+				AFS.Call_IF();
+
 				PHPS.Damage_M ();//相手にダメージ（中）を与える
 				break;
 			case StateManagerScript.state.bind_s://相手が「bind_s」だっったら
@@ -194,6 +207,8 @@ public class ActionManagerScript : MonoBehaviour {
 
 				mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
 				myanim.SetBool("Hold",true);
+
+				AFS.Call_IF();
 
 				PHPS.Damage_M ();//相手にダメージ（中）を与える
 				break;
@@ -253,6 +268,8 @@ public class ActionManagerScript : MonoBehaviour {
 					break;
 				case StateManagerScript.state.guard://相手が「guard」だっったら
 					mySMS.Bind_L ();//自分を「bind_s」状態に
+					AttackEffectScript oppAES = opponent.GetComponent<AttackEffectScript> ();
+					oppAES.GuardEffect_On ();
 					myanim.SetBool ("Snake", false);
 					break;
 				case StateManagerScript.state.check://相手が「check」だっったら
@@ -303,6 +320,7 @@ public class ActionManagerScript : MonoBehaviour {
 			mySMS.Pistol ();//StateをPistolに
 			if (p == 1) {
 				Instantiate (tsume_1p, myself.transform.position, Quaternion.identity);//爪を生成
+				Instantiate (tsumeeffect, myself.transform.position, Quaternion.identity);//エフェクトを生成
 			}
 			if (p == 2) {
 				Instantiate (tsume_2p, myself.transform.position, Quaternion.identity);//爪を生成

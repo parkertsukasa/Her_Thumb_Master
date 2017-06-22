@@ -22,6 +22,9 @@ public class HissatsuWazaScript : MonoBehaviour {
 
 	public GameObject effect;
 
+	public GameObject charged;
+
+
 	// Use this for initialization
 	void Start () {
 		mySMS = GetComponent<StateManagerScript> ();
@@ -29,6 +32,8 @@ public class HissatsuWazaScript : MonoBehaviour {
 		myanim = myhand.GetComponent<Animator> ();
 
 		oppSMS = opponent.GetComponent<StateManagerScript> ();
+
+		//effect = transform.FindChild ("hissatu_v1").gameObject;
 		 
 
 	}
@@ -40,8 +45,10 @@ public class HissatsuWazaScript : MonoBehaviour {
 
 		if (pp >= 100) {
 			canrunch = true;
+			charged.SetActive (true);
 		} else {
 			canrunch = false;
+			charged.SetActive (false);
 		}
 
 
@@ -61,15 +68,16 @@ public class HissatsuWazaScript : MonoBehaviour {
 	public void Runch(){
 
 		if (canrunch == true) {
+			if (mySMS.nowstate == StateManagerScript.state.idle) {
+				mySMS.Hissatsu ();
+				myanim.SetBool ("Hissatsu", true);
 
-			mySMS.Hissatsu ();
-			myanim.SetBool ("Hissatsu", true);
+				pp = 0;
+				canrunch = false;
 
-			pp = 0;
-			canrunch = false;
-
-			Instantiate (effect, transform.position + new Vector3(0,0.3f,0), new Quaternion(0,1,0,90));
-
+				//Instantiate (effect, transform.position + new Vector3(0,0.3f,0), new Quaternion(0,1,0,90));
+				effect.SetActive (true);
+			}
 		}
 
 	}

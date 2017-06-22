@@ -7,6 +7,8 @@ public class FingerScript : MonoBehaviour {
 	private GameObject manager;
 	ActionManagerScript AMS;
 
+	public GameObject effect;
+
 	// Use this for initialization
 	void Start () {
 		manager = GameObject.Find ("Battle_Manager");
@@ -28,5 +30,9 @@ public class FingerScript : MonoBehaviour {
 		if (col.gameObject.tag == "Finger") {
 			AMS.Released ();
 		}
+	}
+
+	public void InstanceEffect(){
+		Instantiate (effect, this.transform.position, this.transform.rotation);
 	}
 }
