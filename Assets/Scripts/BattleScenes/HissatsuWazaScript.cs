@@ -25,6 +25,9 @@ public class HissatsuWazaScript : MonoBehaviour {
 	public GameObject charged;
 
 
+	public GameObject bigchargeeffect;
+
+
 	// Use this for initialization
 	void Start () {
 		mySMS = GetComponent<StateManagerScript> ();
@@ -59,8 +62,12 @@ public class HissatsuWazaScript : MonoBehaviour {
 			if (oppSMS.nowstate == StateManagerScript.state.guard) {
 
 				pp += up * 0.5f * Time.deltaTime;//相手が「guard」なら1.5倍で増える
-
+				bigchargeeffect.SetActive (true);
+			} else {
+				bigchargeeffect.SetActive (false);
 			}
+		} else {
+			bigchargeeffect.SetActive (false);
 		}
 
 	}

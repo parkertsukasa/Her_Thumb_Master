@@ -130,8 +130,7 @@ public class CameraPositionScript : MonoBehaviour {
 		case camstate.hissatsu_far:
 
 			transform.position = Vector3.Lerp (transform.position, new Vector3 (0, 2, -10.0f), Time.deltaTime * 2);
-			transform.rotation = Quaternion.identity;
-				//Quaternion.Lerp (transform.rotation, Quaternion.identity, Time.deltaTime * 2);
+			transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.identity, Time.deltaTime * 2);
 
 			break;
 
