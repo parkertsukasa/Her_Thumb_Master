@@ -38,7 +38,7 @@ public class CameraPositionScript : MonoBehaviour {
 	void Update () {
 
 		distance = Mathf.Abs( player2.transform.position.x - player1.transform.position.x);
-		Debug.Log ("Nowcam =" + nowcam);
+		//Debug.Log ("Nowcam =" + nowcam);
 
 		center = (player1.transform.position.x + player2.transform.position.x) / 2.0f;
 

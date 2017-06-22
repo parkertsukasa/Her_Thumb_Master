@@ -20,6 +20,8 @@ public class ActionManagerScript : MonoBehaviour {
 
 	public GameObject tsumeeffect;
 
+	public GameObject indexfinger;
+
 	// Use this for initialization
 	void Start () {
 		player1 = GameObject.Find ("1P_Manager");
@@ -41,10 +43,10 @@ public class ActionManagerScript : MonoBehaviour {
 		}
 
 		if (SMS1.nowstate == StateManagerScript.state.snake) {
-			//Snake_Process (player2,player1);
+			Snake_Process (player2,player1);
 		}
 		if (SMS2.nowstate == StateManagerScript.state.snake) {
-			//Snake_Process (player1,player2);
+			Snake_Process (player1,player2);
 		}
 
 		//Debug.Log (touched);
@@ -128,6 +130,8 @@ public class ActionManagerScript : MonoBehaviour {
 			Animator myanim = myhand.gameObject.GetComponent<Animator> ();
 			myanim.SetBool ("Attack", true);
 
+			DuaringAttackMoveForwardScript DAMFS = myself.GetComponent<DuaringAttackMoveForwardScript> ();
+			DAMFS.MoveForward ();
 
 		}
 	}
@@ -247,12 +251,13 @@ public class ActionManagerScript : MonoBehaviour {
 			Animator myanim = myhand.gameObject.GetComponent<Animator> ();
 			myanim.SetBool ("Snake", true);
 
-			//---------- 相手のAnimator
+			//---------- 相手のAnimatorfor1P
 			Transform opphand = opponent.transform.FindChild ("Hand_Model");
 			Animator oppanim = opphand.gameObject.GetComponent<Animator> ();
 
 
-			Transform indexfinger = myself.transform.FindChild ("joint22");
+			MyIndexFingerHasScript MIFHS = myself.GetComponent<MyIndexFingerHasScript> ();
+			GameObject indexfinger = MIFHS.myindexfinger;
 			IndexFingerScript IFS = indexfinger.gameObject.GetComponent<IndexFingerScript> ();
 
 			if (IFS.cansnake == true) {
@@ -274,6 +279,7 @@ public class ActionManagerScript : MonoBehaviour {
 					break;
 				case StateManagerScript.state.check://相手が「check」だっったら
 
+				/*
 					SMS.nowstate = StateManagerScript.state.held_l;//相手を「held_l」状態に
 					oppanim.SetInteger ("Held_State", 1);
 
@@ -281,9 +287,11 @@ public class ActionManagerScript : MonoBehaviour {
 					myanim.SetBool ("Hold", true);
 
 					PHPS.Damage_L ();//相手にダメージ（大）を与える
+
+*/
 					break;
 				case StateManagerScript.state.bind_l://相手が「bind_l」だっったら
-
+				/*
 					SMS.nowstate = StateManagerScript.state.held_l;//相手を「held_l」状態に
 					oppanim.SetInteger ("Held_State", 1);
 
@@ -291,9 +299,10 @@ public class ActionManagerScript : MonoBehaviour {
 					myanim.SetBool ("Hold", true);
 
 					PHPS.Damage_L ();//相手にダメージ（大）を与える
+					*/
 					break;
 				case StateManagerScript.state.bind_s://相手が「bind_s」だっったら
-
+				/*
 					SMS.nowstate = StateManagerScript.state.held_l;//相手を「held_l」状態に
 					oppanim.SetInteger ("Held_State", 1);
 
@@ -301,6 +310,7 @@ public class ActionManagerScript : MonoBehaviour {
 					myanim.SetBool ("Hold", true);
 
 					PHPS.Damage_L ();//相手にダメージ（大）を与える
+					*/
 					break;
 				//}
 			}

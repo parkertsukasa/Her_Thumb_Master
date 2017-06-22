@@ -16,8 +16,8 @@ public class StateManagerScript : MonoBehaviour {
 
 	private float timer = 0.0f;//「bind」の時間を測るタイマー
 
-	private const float bindtime_short = 1.0f;//「bind_s」の持続時間
-	private const float bindtime_long = 3.0f;//「bind_s」の持続時間
+	private const float bindtime_short = 2.0f;//「bind_s」の持続時間
+	private const float bindtime_long = 3.0f;//「bind_l」の持続時間
 
 	private Transform hand;
 	private Animator anim;
