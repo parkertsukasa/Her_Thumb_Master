@@ -15,7 +15,9 @@ public class MoveManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+
+
 	}
 
 	//移動用関数。InputManagerScriptから動かしたいプレイヤーを第1引数に、左スティックのアナログ値を第2引数にして実行する。
