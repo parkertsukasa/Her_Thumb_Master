@@ -298,8 +298,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charge: {fileID: 1755530850004318}
   razer: {fileID: 1963589308596982}
-  ChargeTime: 4
-  RazerTime: 4
+  ChargeTime: 2.4
+  RazerTime: 2.4
 --- !u!198 &198002310642553524
 ParticleSystem:
   m_ObjectHideFlags: 1
