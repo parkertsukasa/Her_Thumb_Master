@@ -75,7 +75,7 @@ public class InputManagerScript : MonoBehaviour {
 			r2_1p_canpush = true;
 		}
 
-		if (r2pushed_1p == true) {
+		if (r2pushed_1p == true || Input.GetKeyDown(KeyCode.R)) {
 			AMS.Snake (player2, player1);//Snake
 			r2pushed_1p = false;
 		}
