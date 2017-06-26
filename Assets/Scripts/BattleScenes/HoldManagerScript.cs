@@ -8,9 +8,7 @@ using UnityEngine.SceneManagement;
 public class HoldManagerScript : StateManagerScript {
 
 	public GameObject count;
-	private RawImage countsorce;
-
-	public Texture[] counttexture;
+	private Text counttext;
 
 	public GameObject win;
 	private Text wintext;
@@ -37,9 +35,6 @@ public class HoldManagerScript : StateManagerScript {
 	private float holdtimer = 10.0f;
 
 
-
-
-
 	// Use this for initialization
 	void Start () {
 
@@ -52,7 +47,7 @@ public class HoldManagerScript : StateManagerScript {
 		//PHPS_1P = player1.GetComponent<PlayerHPScript> ();
 		//PHPS_2P = player2.GetComponent<PlayerHPScript> ();
 
-		countsorce = count.GetComponent<RawImage> ();
+		counttext = count.GetComponent<Text> ();
 		wintext = win.GetComponent<Text> ();
 
 	}
@@ -71,8 +66,7 @@ public class HoldManagerScript : StateManagerScript {
 			SMS_1P.nowstate == state.hold_s) {
 
 			count.SetActive (true);
-			int timerint = (int)holdtimer;
-			countsorce.texture = counttexture[timerint];
+			counttext.text = holdtimer.ToString ("f0");
 
 			Resist_2P ();// ぐるぐる入力を取る関数
 
@@ -154,8 +148,7 @@ public class HoldManagerScript : StateManagerScript {
 			Resist_1P ();// ぐるぐる入力を取る関数
 
 			count.SetActive (true);
-			int timerint = (int)holdtimer;
-			countsorce.texture = counttexture[timerint];
+			counttext.text = holdtimer.ToString ("f0");
 
 			holdtimer -= Time.deltaTime;
 

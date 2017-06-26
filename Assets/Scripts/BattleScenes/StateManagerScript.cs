@@ -140,8 +140,6 @@ public class StateManagerScript : MonoBehaviour {
 		nowstate = state.hissatsu;
 	}
 
-
-
 	//Idle状態に戻す
 	public void Idle(){
 		nowstate = state.idle;
