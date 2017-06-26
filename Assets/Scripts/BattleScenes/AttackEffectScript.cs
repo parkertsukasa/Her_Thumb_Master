@@ -11,6 +11,8 @@ public class AttackEffectScript : MonoBehaviour {
 	public GameObject chargeeffect;
 	private StateManagerScript SMS;
 
+	public GameObject pistoleffect;
+
 	// Use this for initialization
 	void Start () {
 		FS = mythumb.GetComponent<FingerScript> ();
@@ -34,12 +36,29 @@ public class AttackEffectScript : MonoBehaviour {
 	}
 
 	public void GuardEffect_On(){
-		guardeffect.SetActive (true);
-		Invoke ("GuardEffect_Off", 1.0f);
+		StartCoroutine ("Wait_Frame");
 	}
 
 	private void GuardEffect_Off(){
 		guardeffect.SetActive (false);
+	}
+		
+	public void PistolEffect_On(){
+		pistoleffect.SetActive (true);
+		Invoke ("PistolEffect_Off", 0.5f);
+	}
+
+	private void PistolEffect_Off(){
+		pistoleffect.SetActive (false);
+	}
+
+
+	private IEnumerator Wait_Frame(){
+		for (int i = 0; i < 7; i++) {
+			yield return null;
+		}
+		guardeffect.SetActive (true);
+		Invoke ("GuardEffect_Off", 1.0f);
 	}
 
 }

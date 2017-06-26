@@ -18,7 +18,7 @@ public class ActionManagerScript : MonoBehaviour {
 	public GameObject tsume_1p;//Pistolで発射する爪
 	public GameObject tsume_2p;//Pistolで発射する爪
 
-	public GameObject tsumeeffect;
+	//public GameObject tsumeeffect;
 
 	public GameObject indexfinger;
 
@@ -330,7 +330,8 @@ public class ActionManagerScript : MonoBehaviour {
 			mySMS.Pistol ();//StateをPistolに
 			if (p == 1) {
 				Instantiate (tsume_1p, myself.transform.position, Quaternion.identity);//爪を生成
-				Instantiate (tsumeeffect, myself.transform.position, Quaternion.identity);//エフェクトを生成
+				AttackEffectScript AES = myself.GetComponent<AttackEffectScript>();
+				AES.PistolEffect_On ();
 			}
 			if (p == 2) {
 				Instantiate (tsume_2p, myself.transform.position, Quaternion.identity);//爪を生成
