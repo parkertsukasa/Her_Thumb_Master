@@ -150,7 +150,7 @@ public class InputManagerScript : MonoBehaviour {
 
 		//------------ps4コントローラー----------------------------
 		if (hrzn_1p >= 0.5f || hrzn_1p <= -0.5f) {
-			MMS.Player_Move (player1, hrzn_1p);
+			MMS.Player_Move (player1, hrzn_1p,1);
 		} else {
 			if (SMS_1P.runstate == StateManagerScript.move_state.walk || SMS_1P.runstate == StateManagerScript.move_state.idle_dush) {
 				SMS_1P.runstate = StateManagerScript.move_state.idle_dush;
@@ -159,7 +159,7 @@ public class InputManagerScript : MonoBehaviour {
 			}
 		}
 		if (hrzn_2p >= 0.5 || hrzn_2p <= -0.5f) {
-			MMS.Player_Move (player2, hrzn_2p);
+			MMS.Player_Move (player2, hrzn_2p,2);
 		} else {
 			if (SMS_2P.runstate == StateManagerScript.move_state.walk) {
 				SMS_2P.runstate = StateManagerScript.move_state.idle_dush;
@@ -173,10 +173,10 @@ public class InputManagerScript : MonoBehaviour {
 
 		//------------Switchコントローラー-------------------------
 		if (jchrzn_1p != 0) {
-			MMS.Player_Move (player1, jchrzn_1p);
+			MMS.Player_Move (player1, jchrzn_1p,1);
 		}
 		if (jchrzn_2p != 0) {
-			MMS.Player_Move (player2, jchrzn_2p);
+			MMS.Player_Move (player2, jchrzn_2p,1);
 		}
 
 

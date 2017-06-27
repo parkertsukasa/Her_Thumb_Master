@@ -7,10 +7,12 @@ public class MoveManagerScript : MonoBehaviour {
 
 	private const float player_speed = 0.3f;
 
+	HPManagerScript HPMS;
+
 
 	// Use this for initialization
 	void Start () {
-		
+		HPMS = GetComponent<HPManagerScript> ();
 	}
 	
 	// Update is called once per frame
@@ -21,19 +23,26 @@ public class MoveManagerScript : MonoBehaviour {
 	}
 
 	//移動用関数。InputManagerScriptから動かしたいプレイヤーを第1引数に、左スティックのアナログ値を第2引数にして実行する。
-	public void Player_Move(GameObject p, float input)
+	public void Player_Move(GameObject p, float input ,int pnum)
 	{
+		float playerspeed;
+		if (pnum == 1) {
+			playerspeed = HPMS.states_1p.speed;
+		} else {
+
+			playerspeed = HPMS.states_2p.speed;
+		}
+
 		StateManagerScript SMS;
 		SMS = p.GetComponent<StateManagerScript> ();
 
 		if (SMS.nowstate == StateManagerScript.state.idle) {//idle時のみ移動可能に
-
 			if (SMS.runstate == StateManagerScript.move_state.idle || SMS.runstate == StateManagerScript.move_state.walk) {
-				p.transform.Translate (Vector3.right * input * player_speed);
+				p.transform.Translate (Vector3.right * input * player_speed * playerspeed);
 				SMS.runstate = StateManagerScript.move_state.walk;
 			}
 			if (SMS.runstate == StateManagerScript.move_state.idle_dush || SMS.runstate == StateManagerScript.move_state.dash) {
-				p.transform.Translate (Vector3.right * input * player_speed * 2.0f);
+				p.transform.Translate (Vector3.right * input * player_speed * playerspeed * 2.0f);
 				SMS.runstate = StateManagerScript.move_state.dash;
 			}
 		}

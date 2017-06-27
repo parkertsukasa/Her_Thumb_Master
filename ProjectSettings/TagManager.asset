@@ -7,6 +7,9 @@ TagManager:
   - Finger
   - IndexFinger
   - Palm
+  - Tsume
+  - Tsume1P
+  - Tsume2P
   layers:
   - Default
   - TransparentFX

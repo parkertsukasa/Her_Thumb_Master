@@ -4,6 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public struct States
+{
+	
+	public float speed,attack,defense;
+
+	public States(float speed,float attack,float defence){
+		this.speed = speed;
+		this.attack = attack;
+		this.defense = defence;
+	}
+}
+
 public class HPManagerScript : MonoBehaviour {
 
 	private GameObject player1;
@@ -12,8 +24,8 @@ public class HPManagerScript : MonoBehaviour {
 	private PlayerHPScript PHPS_1P;
 	private PlayerHPScript PHPS_2P;
 
-	private int hp_1p;
-	private int hp_2p;
+	private float hp_1p;
+	private float hp_2p;
 
 	public GameObject hpb1;
 	public GameObject hpb2;
@@ -24,7 +36,16 @@ public class HPManagerScript : MonoBehaviour {
 	public GameObject win;
 	private Text wintext;
 
+	public GameObject timerGO;
+	private Text timer_text;
 
+	private float timer = 90;
+
+	public States states_1p = new States(1,100,100);
+	public States states_2p = new States(1,100,100);
+
+	public GameObject statesmanager;
+	//private 
 
 	// Use this for initialization
 	void Start () {
@@ -41,10 +62,30 @@ public class HPManagerScript : MonoBehaviour {
 
 		wintext = win.GetComponent<Text> ();
 
+		timer_text = timerGO.GetComponent<Text> ();
+
+		//statesmanager = GameObject.Find ("");
+		//
+		//states_1p = new States();
+		//states_2p = new States();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+
+		timer_text.text = timer.ToString ("f0");
+		timer -= Time.deltaTime;
+
+		if (timer <= 0.0f) {
+			if (hp_1p > hp_2p) {
+				//1Pの勝利
+				//SceneManager.LoadScene("");
+			} else {
+				//2Pの勝利
+				//SceneManager.LoadScene("");
+			}
+		}
+
 
 		hp_1p = PHPS_1P.hp;
 		hp_2p = PHPS_2P.hp;

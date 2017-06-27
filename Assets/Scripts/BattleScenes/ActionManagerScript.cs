@@ -244,7 +244,7 @@ public class ActionManagerScript : MonoBehaviour {
 
 			StateManagerScript SMS = opponent.GetComponent<StateManagerScript> ();
 			StateManagerScript mySMS = myself.GetComponent<StateManagerScript> ();
-			PlayerHPScript PHPS = opponent.GetComponent<PlayerHPScript> ();
+			//PlayerHPScript PHPS = opponent.GetComponent<PlayerHPScript> ();
 
 			//---------- Animatorの管理
 			Transform myhand = myself.transform.FindChild ("Hand_Model");
