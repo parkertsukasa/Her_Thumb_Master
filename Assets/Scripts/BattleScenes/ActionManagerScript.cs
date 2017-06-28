@@ -20,7 +20,7 @@ public class ActionManagerScript : MonoBehaviour {
 
 	//public GameObject tsumeeffect;
 
-	public GameObject indexfinger;
+	//public GameObject indexfinger;
 
 	// Use this for initialization
 	void Start () {
@@ -205,6 +205,18 @@ public class ActionManagerScript : MonoBehaviour {
 				PHPS.Damage_M ();//相手にダメージ（中）を与える
 				break;
 			case StateManagerScript.state.bind_s://相手が「bind_s」だっったら
+
+				SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
+				oppanim.SetInteger("Held_State",1);
+
+				mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
+				myanim.SetBool("Hold",true);
+
+				AFS.Call_IF();
+
+				PHPS.Damage_M ();//相手にダメージ（中）を与える
+				break;
+			case StateManagerScript.state.pistol://相手が「pistol」だっったら
 
 				SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
 				oppanim.SetInteger("Held_State",1);

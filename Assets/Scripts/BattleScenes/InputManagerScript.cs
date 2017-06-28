@@ -152,6 +152,7 @@ public class InputManagerScript : MonoBehaviour {
 		if (hrzn_1p >= 0.5f || hrzn_1p <= -0.5f) {
 			MMS.Player_Move (player1, hrzn_1p,1);
 		} else {
+			MMS.Player_Stop (player1);//速度0に
 			if (SMS_1P.runstate == StateManagerScript.move_state.walk || SMS_1P.runstate == StateManagerScript.move_state.idle_dush) {
 				SMS_1P.runstate = StateManagerScript.move_state.idle_dush;
 			} else {
@@ -161,6 +162,7 @@ public class InputManagerScript : MonoBehaviour {
 		if (hrzn_2p >= 0.5 || hrzn_2p <= -0.5f) {
 			MMS.Player_Move (player2, hrzn_2p,2);
 		} else {
+			MMS.Player_Stop (player2);//速度0に
 			if (SMS_2P.runstate == StateManagerScript.move_state.walk) {
 				SMS_2P.runstate = StateManagerScript.move_state.idle_dush;
 			} else {

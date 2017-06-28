@@ -31,6 +31,8 @@ public class HoldManagerScript : StateManagerScript {
 	private StateManagerScript SMS_1P;
 	private StateManagerScript SMS_2P;
 
+	public float holdeddistance;
+
 	//private PlayerHPScript PHPS_1P;
 	//private PlayerHPScript PHPS_2P;
 
@@ -65,10 +67,13 @@ public class HoldManagerScript : StateManagerScript {
 
 	//---------- 1PがHold状態に入った時の処理
 	private void Holded_by_1P(){
+
 		
 		if (SMS_1P.nowstate == state.hold_l ||
 			SMS_1P.nowstate == state.hold_m ||
 			SMS_1P.nowstate == state.hold_s) {
+
+			player2.transform.position = player1.transform.position + new Vector3 (holdeddistance,0,0);
 
 			count.SetActive (true);
 			int timerint = (int)holdtimer;
@@ -146,10 +151,13 @@ public class HoldManagerScript : StateManagerScript {
 
 	//---------- 2PがHold状態に入った時の処理
 	private void Holded_by_2P(){
+		
 
 		if (SMS_2P.nowstate == state.hold_l ||
 			SMS_2P.nowstate == state.hold_m ||
 			SMS_2P.nowstate == state.hold_s) {
+
+			player1.transform.position = player2.transform.position - new Vector3 (holdeddistance,0,0);
 
 			Resist_1P ();// ぐるぐる入力を取る関数
 

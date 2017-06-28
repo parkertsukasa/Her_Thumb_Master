@@ -38,7 +38,7 @@ public class CameraPositionScript : MonoBehaviour {
 	void Update () {
 
 		distance = Mathf.Abs( player2.transform.position.x - player1.transform.position.x);
-		//Debug.Log ("Nowcam =" + nowcam);
+		//Debug.Log ("Distance =" + distance);
 
 		center = (player1.transform.position.x + player2.transform.position.x) / 2.0f;
 
@@ -124,7 +124,7 @@ public class CameraPositionScript : MonoBehaviour {
 
 			transform.position = Vector3.Lerp (transform.position, player2.transform.position + new Vector3 (-5, 0.2f, -5), Time.deltaTime * 3);
 			transform.LookAt (player2.transform.position);
-
+			Invoke ("Change_to_HissatsuFar", 2.0f);
 			break;
 
 		case camstate.hissatsu_far:

@@ -41,8 +41,8 @@ public class HPManagerScript : MonoBehaviour {
 
 	private float timer = 90;
 
-	public States states_1p = new States(1,100,100);
-	public States states_2p = new States(1,100,100);
+	public States states_1p = new States(1,1,1);
+	public States states_2p = new States(1,1,1);
 
 	public GameObject statesmanager;
 	//private 
