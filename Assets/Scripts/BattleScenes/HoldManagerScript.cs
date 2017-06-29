@@ -217,6 +217,7 @@ public class HoldManagerScript : StateManagerScript {
 			//攻撃ボタンを押したらぐるぐる入力から1減らす
 			if(Input.GetButtonDown("2P_Circle") || Input.GetButtonDown("2P_Cross")){
 				escape -= 1;
+				SEPS.GuardSuccess ();
 			}
 
 			//10秒経過で勝利
@@ -245,8 +246,8 @@ public class HoldManagerScript : StateManagerScript {
 
 		//----------- hpが100ならバイブスが2 50なら1 15以下なら0,3 ---------------
 		float vibes = PHPS_1P.hp / 50;
-		if (PHPS_1P.hp < 15) {
-			vibes = 0.3f;
+		if (PHPS_1P.hp < ) {
+			vibes = 0.5f;
 		}
 
 
