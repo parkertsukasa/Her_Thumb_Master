@@ -34,6 +34,8 @@ public class HoldManagerScript : StateManagerScript {
 	private PlayerHPScript PHPS_1P;
 	private PlayerHPScript PHPS_2P;
 
+	private SEPlayScript SEPS;
+
 	public float holdeddistance;
 
 	private float holdtimer = 10.0f;
@@ -44,6 +46,8 @@ public class HoldManagerScript : StateManagerScript {
 
 	// Use this for initialization
 	void Start () {
+
+		SEPS = GetComponent<SEPlayScript> ();
 
 		player1 = GameObject.Find ("1P_Manager");
 		player2 = GameObject.Find ("2P_Manager");
@@ -252,6 +256,7 @@ public class HoldManagerScript : StateManagerScript {
 			state_1p = input_state.up;
 				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 2);
+				SEPS.Resist ();
 			}
 		}
 
@@ -261,6 +266,7 @@ public class HoldManagerScript : StateManagerScript {
 			state_1p = input_state.down;
 				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 4);
+				SEPS.Resist ();
 			}
 		}
 
@@ -270,6 +276,7 @@ public class HoldManagerScript : StateManagerScript {
 			state_1p = input_state.right;
 				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 3);
+				SEPS.Resist ();
 			}
 		}
 
@@ -279,6 +286,7 @@ public class HoldManagerScript : StateManagerScript {
 				state_1p = input_state.left;
 				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 5);
+				SEPS.Resist ();
 			}
 		}
 
@@ -313,6 +321,7 @@ public class HoldManagerScript : StateManagerScript {
 				state_2p = input_state.up;
 				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 2);
+				SEPS.Resist ();
 			}
 		}
 
@@ -322,6 +331,7 @@ public class HoldManagerScript : StateManagerScript {
 				state_2p = input_state.down;
 				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 4);
+				SEPS.Resist ();
 			}
 		}
 
@@ -331,6 +341,7 @@ public class HoldManagerScript : StateManagerScript {
 				state_2p = input_state.right;
 				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 3);
+				SEPS.Resist ();
 			}
 		}
 
@@ -340,6 +351,7 @@ public class HoldManagerScript : StateManagerScript {
 				state_2p = input_state.left;
 				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 5);
+				SEPS.Resist ();
 			}
 		}
 

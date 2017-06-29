@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class StateManagerScript : MonoBehaviour {
 
 	public enum state {
-		idle, guard, check, attack, snake, bind_s, bind_l, hold_s, hold_m, hold_l, held_s, held_m, held_l,force_check,pistol,hissatsu
+		ready,idle, guard, check, attack, snake, bind_s, bind_l, hold_s, hold_m, hold_l, held_s, held_m, held_l,force_check,pistol,hissatsu
 	}
 
 	public Text STATE;
 
-	public state nowstate = state.idle;//現在の状態を格納する変数
+	public state nowstate = state.ready;//現在の状態を格納する変数
 
 	private float timer = 0.0f;//「bind」の時間を測るタイマー
 
@@ -36,6 +36,11 @@ public class StateManagerScript : MonoBehaviour {
 	void Start () {
 		hand = transform.FindChild ("Hand_Model");
 		anim = hand.GetComponent<Animator> ();
+		Invoke ("StartBattle", 2.0f);
+	}
+
+	private void StartBattle(){
+		nowstate = state.idle;
 	}
 	
 	// Update is called once per frame

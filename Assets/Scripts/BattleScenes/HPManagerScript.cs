@@ -34,7 +34,7 @@ public class HPManagerScript : MonoBehaviour {
 	public Image hpber_2p;
 
 	public GameObject win;
-	private Text wintext;
+	//private Text wintext;
 
 	public GameObject timerGO;
 	private Text timer_text;
@@ -45,7 +45,8 @@ public class HPManagerScript : MonoBehaviour {
 	public States states_2p = new States(1,1,1);
 
 	public GameObject statesmanager;
-	//private 
+
+	private bool startbattle; 
 
 	// Use this for initialization
 	void Start () {
@@ -60,9 +61,12 @@ public class HPManagerScript : MonoBehaviour {
 		hp_1p = PHPS_1P.hp;
 		hp_2p = PHPS_2P.hp;
 
-		wintext = win.GetComponent<Text> ();
+		//wintext = win.GetComponent<Text> ();
 
 		timer_text = timerGO.GetComponent<Text> ();
+
+		startbattle = false;
+		Invoke ("BattleStart", 2.0f);
 
 		//statesmanager = GameObject.Find ("");
 		//
@@ -70,11 +74,17 @@ public class HPManagerScript : MonoBehaviour {
 		//states_2p = new States();
 	}
 
+	private void BattleStart(){
+		startbattle = true;
+	}
+
 	// Update is called once per frame
 	void Update () {
 
 		timer_text.text = timer.ToString ("f0");
-		timer -= Time.deltaTime;
+		if (startbattle == true) {
+			timer -= Time.deltaTime;
+		}
 
 		if (timer <= 0.0f) {
 			if (hp_1p > hp_2p) {

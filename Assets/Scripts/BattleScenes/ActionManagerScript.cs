@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class ActionManagerScript : MonoBehaviour {
 
 	private GameObject player1;
@@ -18,6 +20,8 @@ public class ActionManagerScript : MonoBehaviour {
 	public GameObject tsume_1p;//Pistolで発射する爪
 	public GameObject tsume_2p;//Pistolで発射する爪
 
+	private SEPlayScript SEPS;
+
 	//public GameObject tsumeeffect;
 
 	//public GameObject indexfinger;
@@ -28,6 +32,7 @@ public class ActionManagerScript : MonoBehaviour {
 		player2 = GameObject.Find ("2P_Manager");
 		SMS1 = player1.GetComponent<StateManagerScript> ();
 		SMS2 = player2.GetComponent<StateManagerScript> ();
+		SEPS = GetComponent<SEPlayScript> ();
 		//FS = mythumb.GetComponent<FingerScript> ();
 
 	}
@@ -82,6 +87,7 @@ public class ActionManagerScript : MonoBehaviour {
 		StateManagerScript SMS = myself.GetComponent<StateManagerScript>();
 		if (SMS.nowstate == StateManagerScript.state.idle) {
 			SMS.Guard ();
+			SEPS.Guard ();
 			Transform hand = myself.transform.FindChild ("Hand_Model");
 			Animator anim = hand.gameObject.GetComponent<Animator> ();
 			anim.SetBool ("Guard", true);
@@ -100,6 +106,7 @@ public class ActionManagerScript : MonoBehaviour {
 		StateManagerScript SMS = myself.GetComponent<StateManagerScript>();
 		if (SMS.nowstate == StateManagerScript.state.idle) {
 			SMS.Check ();
+			SEPS.Charge ();
 			Transform hand = myself.transform.FindChild ("Hand_Model");
 			Animator anim = hand.gameObject.GetComponent<Animator> ();
 			anim.SetBool ("Check", true);
@@ -111,6 +118,7 @@ public class ActionManagerScript : MonoBehaviour {
 		Transform hand = myself.transform.FindChild("Hand_Model");
 		Animator anim = hand.gameObject.GetComponent<Animator> ();
 		anim.SetBool ("Check", false);
+		SEPS.Stop ();
 	}
 
 	//InputManagerScriptから×ボタン入力時に第1引数に[相手]を第2引数に[自分]を渡して呼び出す
@@ -164,7 +172,7 @@ public class ActionManagerScript : MonoBehaviour {
 			switch (SMS.nowstate) {
 			case StateManagerScript.state.idle://相手が「idle」だっったら
 				mySMS.Bind_S ();//自分を「bind_s」状態に
-
+				SEPS.Bind ();
 				myanim.SetBool("Bind",true);
 
 				StartCoroutine( "BindTrue_before_AttackFalse" , myself);
@@ -175,6 +183,8 @@ public class ActionManagerScript : MonoBehaviour {
 				AttackEffectScript oppAES = opponent.GetComponent<AttackEffectScript> ();
 				oppAES.GuardEffect_On ();
 				myanim.SetBool("Attack",false);
+				SEPS.GuardSuccess ();
+				SEPS.Bind ();
 				break;
 			case StateManagerScript.state.check://相手が「check」だっったら
 				SMS.nowstate = StateManagerScript.state.held_m;//相手を「held_m」状態に
@@ -182,6 +192,8 @@ public class ActionManagerScript : MonoBehaviour {
 
 				mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
 				myanim.SetBool ("Hold", true);
+
+				SEPS.Hold ();
 
 				AFS.Call_IF();
 
@@ -200,6 +212,8 @@ public class ActionManagerScript : MonoBehaviour {
 				mySMS.nowstate = StateManagerScript.state.hold_m;//自分を「hold_m」状態に
 				myanim.SetBool("Hold",true);
 
+				SEPS.Hold ();
+
 				AFS.Call_IF();
 
 				PHPS.Damage_M ();//相手にダメージ（中）を与える
@@ -214,6 +228,8 @@ public class ActionManagerScript : MonoBehaviour {
 
 				AFS.Call_IF();
 
+				SEPS.Hold ();
+
 				PHPS.Damage_M ();//相手にダメージ（中）を与える
 				break;
 			case StateManagerScript.state.pistol://相手が「pistol」だっったら
@@ -225,6 +241,8 @@ public class ActionManagerScript : MonoBehaviour {
 				myanim.SetBool("Hold",true);
 
 				AFS.Call_IF();
+
+				SEPS.Hold ();
 
 				PHPS.Damage_M ();//相手にダメージ（中）を与える
 				break;
@@ -246,6 +264,8 @@ public class ActionManagerScript : MonoBehaviour {
 			myanim.SetBool ("Snake", true);
 
 			mySMS.Snake ();
+
+			SEPS.Snake ();
 
 
 		}
@@ -277,17 +297,21 @@ public class ActionManagerScript : MonoBehaviour {
 			//if (touched == true) {//指先のコライダー同士が触れていたら
 
 				switch (SMS.nowstate) {
-				case StateManagerScript.state.idle://相手が「idle」だっったら
-					SMS.Bind_S ();
+			case StateManagerScript.state.idle://相手が「idle」だっったら
+				SMS.Bind_S ();
+				SEPS.Bind ();
+					SEPS.SnakeSuccess ();
 					oppanim.SetBool ("Bind", true);
 					myanim.SetBool ("Snake", false);
-					Debug.Log ("OK");
 					break;
-				case StateManagerScript.state.guard://相手が「guard」だっったら
-					mySMS.Bind_L ();//自分を「bind_s」状態に
-					AttackEffectScript oppAES = opponent.GetComponent<AttackEffectScript> ();
-					oppAES.GuardEffect_On ();
-					myanim.SetBool ("Snake", false);
+
+			case StateManagerScript.state.guard://相手が「guard」だっったら
+				mySMS.Bind_L ();//自分を「bind_s」状態に
+				SEPS.Bind ();
+				AttackEffectScript oppAES = opponent.GetComponent<AttackEffectScript> ();
+				oppAES.GuardEffect_On ();
+				myanim.SetBool ("Snake", false);
+				SEPS.GuardSuccess ();
 					break;
 				case StateManagerScript.state.check://相手が「check」だっったら
 
@@ -344,11 +368,13 @@ public class ActionManagerScript : MonoBehaviour {
 				Instantiate (tsume_1p, myself.transform.position, Quaternion.identity);//爪を生成
 				AttackEffectScript AES = myself.GetComponent<AttackEffectScript>();
 				AES.PistolEffect_On ();
+				SEPS.P1_Tsumetobashi ();
 			}
 			if (p == 2) {
 				Instantiate (tsume_2p, myself.transform.position, Quaternion.identity);//爪を生成
 				AttackEffectScript AES = myself.GetComponent<AttackEffectScript>();
 				AES.PistolEffect_On ();
+				SEPS.P2_Tsumetobashi ();
 			}
 		}
 	}

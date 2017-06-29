@@ -36,19 +36,37 @@ public class InputManagerScript : MonoBehaviour {
 	private bool l2pushed_2p = false;
 	private bool l2_2p_canpush = true;
 
+	private bool startbattle; 
+
 	// Use this for initialization
 	void Start () {
 		player1 = GameObject.Find ("1P_Manager");
 		player2 = GameObject.Find ("2P_Manager");
 
+
 		MMS = GetComponent<MoveManagerScript> ();
 		SMS_1P = player1.GetComponent<StateManagerScript> ();
 		SMS_2P = player2.GetComponent<StateManagerScript> ();
 		AMS = GetComponent<ActionManagerScript> ();
+
+		startbattle = false;
+		Invoke ("BattleStart", 2.0f);
 	}
+
+	private void BattleStart(){
+		startbattle = true;
+	}
+
+
 	
 	// Update is called once per frame
 	void Update () {
+		if (startbattle == true) {
+			InputField ();
+		}
+	}
+
+	void InputField(){
 
 		hrzn_1p = Input.GetAxis ("1P_LeftHorizontal");
 		hrzn_2p = Input.GetAxis ("2P_LeftHorizontal");
