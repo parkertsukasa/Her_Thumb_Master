@@ -49,4 +49,8 @@ public class PlayerHPScript : MonoBehaviour {
 	public void Damage_S(){
 		hp -= 10 * fixer;
 	}
+
+	public void Pistol(){
+		hp -= 1 * fixer;
+	}
 }

@@ -15,7 +15,7 @@ public class HoldManagerScript : StateManagerScript {
 	public GameObject win;
 	private Text wintext;
 
-	public int escape = 0;
+	public float escape = 0;
 
 	private float hrzn;
 	private float vrti;
@@ -31,10 +31,10 @@ public class HoldManagerScript : StateManagerScript {
 	private StateManagerScript SMS_1P;
 	private StateManagerScript SMS_2P;
 
-	public float holdeddistance;
+	private PlayerHPScript PHPS_1P;
+	private PlayerHPScript PHPS_2P;
 
-	//private PlayerHPScript PHPS_1P;
-	//private PlayerHPScript PHPS_2P;
+	public float holdeddistance;
 
 	private float holdtimer = 10.0f;
 
@@ -51,8 +51,8 @@ public class HoldManagerScript : StateManagerScript {
 		SMS_1P = player1.GetComponent<StateManagerScript> ();
 		SMS_2P = player2.GetComponent<StateManagerScript> ();
 
-		//PHPS_1P = player1.GetComponent<PlayerHPScript> ();
-		//PHPS_2P = player2.GetComponent<PlayerHPScript> ();
+		PHPS_1P = player1.GetComponent<PlayerHPScript> ();
+		PHPS_2P = player2.GetComponent<PlayerHPScript> ();
 
 		countsorce = count.GetComponent<RawImage> ();
 		wintext = win.GetComponent<Text> ();
@@ -75,6 +75,7 @@ public class HoldManagerScript : StateManagerScript {
 
 			player2.transform.position = player1.transform.position + new Vector3 (holdeddistance,0,0);
 
+
 			count.SetActive (true);
 			int timerint = (int)holdtimer;
 			countsorce.texture = counttexture[timerint];
@@ -83,7 +84,7 @@ public class HoldManagerScript : StateManagerScript {
 
 			holdtimer -= Time.deltaTime;
 
-			int release = 30;//ぐるぐる入力による解除の閾値
+			float release = 30;//ぐるぐる入力による解除の閾値
 
 			//----- holdの種類によって解除難度の変更
 			switch (SMS_1P.nowstate) {
@@ -238,11 +239,18 @@ public class HoldManagerScript : StateManagerScript {
 		Transform hand = player1.transform.FindChild ("Hand_Model");
 		Animator anim = hand.gameObject.GetComponent<Animator> ();
 
+		//----------- hpが100ならバイブスが2 50なら1 15以下なら0,3 ---------------
+		float vibes = PHPS_1P.hp / 50;
+		if (PHPS_1P.hp < 15) {
+			vibes = 0.3f;
+		}
+
+
 		//-----「↑』入力時直前に「↑」が押されていなければカウント
 		if (hrzn >= 0.8f) {
 			if(state_1p != input_state.up){
 			state_1p = input_state.up;
-			escape += 1;
+				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 2);
 			}
 		}
@@ -251,7 +259,7 @@ public class HoldManagerScript : StateManagerScript {
 		if (hrzn <= -0.8f) {
 			if(state_1p != input_state.down){
 			state_1p = input_state.down;
-			escape += 1;
+				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 4);
 			}
 		}
@@ -260,7 +268,7 @@ public class HoldManagerScript : StateManagerScript {
 		if (vrti >= 0.8f) {
 			if(state_1p != input_state.right){
 			state_1p = input_state.right;
-			escape += 1;
+				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 3);
 			}
 		}
@@ -269,7 +277,7 @@ public class HoldManagerScript : StateManagerScript {
 		if (vrti <= -0.8f) {
 			if (state_1p != input_state.left) {
 				state_1p = input_state.left;
-				escape += 1;
+				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 5);
 			}
 		}
@@ -290,11 +298,20 @@ public class HoldManagerScript : StateManagerScript {
 		Transform hand = player2.transform.FindChild ("Hand_Model");
 		Animator anim = hand.gameObject.GetComponent<Animator> ();
 
+
+		//----------- hpが100ならバイブスが2 50なら1 15以下なら0,3 ---------------
+		float vibes = PHPS_2P.hp / 50;
+		if (PHPS_2P.hp < 15) {
+			vibes = 0.3f;
+		}
+
+
+
 		//-----「↑』入力時直前に「↑」が押されていなければカウント
 		if (hrzn >= 0.8f) {
 			if(state_2p != input_state.up){
 				state_2p = input_state.up;
-				escape += 1;
+				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 2);
 			}
 		}
@@ -303,7 +320,7 @@ public class HoldManagerScript : StateManagerScript {
 		if (hrzn <= -0.8f) {
 			if(state_2p != input_state.down){
 				state_2p = input_state.down;
-				escape += 1;
+				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 4);
 			}
 		}
@@ -312,7 +329,7 @@ public class HoldManagerScript : StateManagerScript {
 		if (vrti >= 0.8f) {
 			if(state_2p != input_state.right){
 				state_2p = input_state.right;
-				escape += 1;
+				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 3);
 			}
 		}
@@ -321,7 +338,7 @@ public class HoldManagerScript : StateManagerScript {
 		if (vrti <= -0.8f) {
 			if (state_2p != input_state.left) {
 				state_2p = input_state.left;
-				escape += 1;
+				escape += 1 * vibes;
 				anim.SetInteger ("Held_State", 5);
 			}
 		}

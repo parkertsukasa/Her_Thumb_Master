@@ -347,6 +347,8 @@ public class ActionManagerScript : MonoBehaviour {
 			}
 			if (p == 2) {
 				Instantiate (tsume_2p, myself.transform.position, Quaternion.identity);//爪を生成
+				AttackEffectScript AES = myself.GetComponent<AttackEffectScript>();
+				AES.PistolEffect_On ();
 			}
 		}
 	}

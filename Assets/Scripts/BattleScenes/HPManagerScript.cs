@@ -94,18 +94,24 @@ public class HPManagerScript : MonoBehaviour {
 		hpber_2p.fillAmount = hp_2p * 0.01f;
 
 		if (hp_1p <= 0) {
+			hp_1p = 1;
+			/*
 			win.SetActive (true);
 			wintext.text = "2P WIN!";
 			if (Input.anyKeyDown) {
 				SceneManager.LoadScene ("Title");
 			}
+			*/
 		}
 		if (hp_2p <= 0) {
+			hp_2p = 1;
+		/*
 			win.SetActive (true);
 			wintext.text = "1P WIN!";
 			if (Input.anyKeyDown) {
 				SceneManager.LoadScene ("Title");
 			}
+			*/
 		}
 
 	}

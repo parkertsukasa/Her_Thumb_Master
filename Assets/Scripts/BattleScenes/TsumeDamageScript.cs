@@ -21,7 +21,7 @@ public class TsumeDamageScript : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if (playernum == 1 && col.gameObject.tag == "Tsume2P" || playernum == 2 && col.gameObject.tag == "Tsume1P") {
-			PHPS.Damage_S ();
+			PHPS.Pistol ();
 		}
 	}
 }

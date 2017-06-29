@@ -54,7 +54,7 @@ public class StateManagerScript : MonoBehaviour {
 	//---------- Animation再生終了後にIdleに戻す
 	private void Reset_to_Idle(){
 		if(nowstate == state.attack || nowstate == state.snake || nowstate == state.pistol || nowstate == state.hissatsu){
-			if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f){
+			if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f){
 				nowstate = state.idle;
 				anim.SetBool ("Attack", false);
 				anim.SetBool ("Snake", false);
