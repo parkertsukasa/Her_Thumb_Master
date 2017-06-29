@@ -246,7 +246,7 @@ public class HoldManagerScript : StateManagerScript {
 
 		//----------- hpが100ならバイブスが2 50なら1 15以下なら0,3 ---------------
 		float vibes = PHPS_1P.hp / 50;
-		if (PHPS_1P.hp < ) {
+		if (PHPS_1P.hp < 25) {
 			vibes = 0.5f;
 		}
 

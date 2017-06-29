@@ -38,6 +38,10 @@ public class PlayerHPScript : MonoBehaviour {
 		
 	}
 
+	public void Damage_Hissatsu(){
+		hp -= 50 * fixer;
+	}
+
 	public void Damage_L (){
 		hp -= 30 * fixer;
 	}

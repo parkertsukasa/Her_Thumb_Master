@@ -17,6 +17,7 @@ public class HissatsuWazaScript : MonoBehaviour {
 
 	public GameObject opponent;
 	private StateManagerScript oppSMS;
+	private PlayerHPScript PHPS;
 	private Transform opphand;
 	private Animator oppanim;
 
@@ -39,6 +40,7 @@ public class HissatsuWazaScript : MonoBehaviour {
 		oppSMS = opponent.GetComponent<StateManagerScript> ();
 		opphand = opponent.transform.FindChild ("Hand_Model");
 		oppanim = opphand.GetComponent<Animator> ();
+		PHPS = opponent.GetComponent<PlayerHPScript> ();
 
 		//effect = transform.FindChild ("hissatu_v1").gameObject;
 		 
@@ -82,6 +84,8 @@ public class HissatsuWazaScript : MonoBehaviour {
 			if (mySMS.nowstate == StateManagerScript.state.idle) {
 				mySMS.Hissatsu ();
 				myanim.SetBool ("Hissatsu", true);
+
+				PHPS.Damage_Hissatsu ();//仮
 
 				oppSMS.Idle ();
 				Invoke ("HitHissatsu", 2.4f);
