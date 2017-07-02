@@ -62,8 +62,9 @@ public class TitleAnimationManagerScript : MonoBehaviour {
 		switch(nowstate){
 		case TitleState.logo:
 			if (Input.anyKeyDown) {
-				animator.SetBool ("GoMode", true);
-				nowstate = TitleState.select_cpu;
+				SceneManager.LoadScene ("Charaselect");//シーン移動
+				//animator.SetBool ("GoMode", true);
+				//nowstate = TitleState.select_cpu;
 			}
 			break;
 
@@ -91,7 +92,7 @@ public class TitleAnimationManagerScript : MonoBehaviour {
 		case TitleState.select_2p:
 			selecticon.transform.localPosition = new Vector3 (142, -92, 0);
 			if (Input.GetButtonDown ("1P_Circle") || Input.GetButtonDown ("2P_Circle")) {
-				SceneManager.LoadScene ("Battle");//シーン移動
+				SceneManager.LoadScene ("Charaselect");//シーン移動
 			}
 			if (selectok == true) {
 				//「↑」入力

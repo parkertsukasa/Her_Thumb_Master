@@ -70,27 +70,29 @@ public class MoveManagerScript : MonoBehaviour {
 		if (SMS.nowstate == StateManagerScript.state.idle) {//idle時のみ移動可能に
 			Rigidbody r = p.GetComponent<Rigidbody> ();
 			if (distance >= mindis) {
-				if (pnum == 1 && player1.transform.position.x >= -13 || pnum == 2 && player2.transform.position.x <= 13)
-				if (SMS.runstate == StateManagerScript.move_state.idle || SMS.runstate == StateManagerScript.move_state.walk) {
-					r.velocity = (Vector3.right * input * player_speed * playerspeed);
-					SMS.runstate = StateManagerScript.move_state.walk;
+				if (pnum == 1 && player1.transform.position.x >= -13 || pnum == 2 && player2.transform.position.x <= 13) {
+					if (SMS.runstate == StateManagerScript.move_state.idle || SMS.runstate == StateManagerScript.move_state.walk) {
+						r.velocity = (Vector3.right * input * player_speed * playerspeed);
+						SMS.runstate = StateManagerScript.move_state.walk;
+					}
+					if (SMS.runstate == StateManagerScript.move_state.idle_dush || SMS.runstate == StateManagerScript.move_state.dash) {
+						StartCoroutine (Dash (r, input));
+						SMS.runstate = StateManagerScript.move_state.dash;
+					}
 				}
-				if (SMS.runstate == StateManagerScript.move_state.idle_dush){ //|| SMS.runstate == StateManagerScript.move_state.dash) {
-					StartCoroutine(Dash(r,input));
-					//r.velocity = (Vector3.right * input * player_speed * playerspeed * 2.0f);
-					SMS.runstate = StateManagerScript.move_state.dash;
-				}
+			} else {
+				r = p.GetComponent<Rigidbody> ();
+				r.velocity = Vector3.zero;
 			}
-		} else {
-			Rigidbody r = p.GetComponent<Rigidbody> ();
-			r.velocity = Vector3.zero;
 		}
-
 	}
+				
 
-	private IEnumerator Dash(Rigidbody r, float input){
-		for (int i = 0; i < 7; i++) {
-			r.velocity = (Vector3.right * input * player_speed  * 6.0f);
+	private IEnumerator Dash(Rigidbody r,float input){
+		for (int i = 0; i < 5; i++) {
+			if (distance > 2) {
+				r.velocity = (Vector3.right * input * player_speed * 6.0f);
+			}
 			yield return null;
 		}
 		r.velocity = Vector3.zero;

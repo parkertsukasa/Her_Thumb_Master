@@ -44,8 +44,8 @@ public class AttackEffectScript : MonoBehaviour {
 	}
 		
 	public void PistolEffect_On(){
-		pistoleffect.SetActive (true);
-		Invoke ("PistolEffect_Off", 0.5f);
+		//pistoleffect.SetActive (true);
+		//Invoke ("PistolEffect_Off", 0.5f);
 	}
 
 	private void PistolEffect_Off(){

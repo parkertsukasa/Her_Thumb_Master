@@ -92,10 +92,6 @@ public class SEPlayScript : MonoBehaviour {
 		AS.PlayOneShot(holding,1.0f);
 	}
 
-	public void Attack(){
-		AS.PlayOneShot(attackswing,1.0f);
-	}
-
 	public void KO(){
 		AS.PlayOneShot(ko_voice,1.0f);
 	}

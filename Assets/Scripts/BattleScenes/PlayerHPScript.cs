@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerHPScript : MonoBehaviour {
 
@@ -18,17 +17,10 @@ public class PlayerHPScript : MonoBehaviour {
 	States mystates;
 	States oppstates;
 
-	public GameObject MYHP;
-	private Image myhpber;
-
-	float timer = 0;
-
 	// Use this for initialization
 	void Start () {
 		battlemanager = GameObject.Find ("Battle_Manager");
 		HPMS = battlemanager.GetComponent<HPManagerScript> ();
-
-		myhpber = MYHP.GetComponent<Image> ();
 
 		hp = 100;
 		if (playernum == 1) {//1Pの場合
@@ -43,15 +35,7 @@ public class PlayerHPScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (hp < 30) {
-			myhpber.color = Color.red;
-		}
-		if (hp < 15) {
-			timer += Time.deltaTime * 2.0f;
-			myhpber.color = new Color (1, 0, 0, Mathf.Sin(180 * timer * Mathf.Deg2Rad));
-		}
-
+		
 	}
 
 	public void Damage_Hissatsu(){

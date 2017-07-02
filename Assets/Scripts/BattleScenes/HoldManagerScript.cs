@@ -12,9 +12,6 @@ public class HoldManagerScript : StateManagerScript {
 
 	public Texture[] counttexture;
 
-	public GameObject win;
-	private Text wintext;
-
 	public float escape = 0;
 
 	private float hrzn;
@@ -40,9 +37,7 @@ public class HoldManagerScript : StateManagerScript {
 
 	private float holdtimer = 10.0f;
 
-	public float[] vibes_pattern;
-
-
+	public float[] vibes_patern;
 
 
 
@@ -61,7 +56,6 @@ public class HoldManagerScript : StateManagerScript {
 		PHPS_2P = player2.GetComponent<PlayerHPScript> ();
 
 		countsorce = count.GetComponent<RawImage> ();
-		wintext = win.GetComponent<Text> ();
 
 	}
 	
@@ -144,11 +138,9 @@ public class HoldManagerScript : StateManagerScript {
 			//10秒経過で勝利
 			if (holdtimer <= 0.0f) {
 				holdtimer = 0;
-				win.SetActive (true);
-				wintext.text = "1P WIN!";
-				if (Input.anyKeyDown) {
-					SceneManager.LoadScene ("Title");
-				}
+				//wintext.text = "1P WIN!";
+
+				Invoke ("Scene", 5.0f);
 				//1Pの勝利
 
 			}
@@ -225,11 +217,8 @@ public class HoldManagerScript : StateManagerScript {
 			//10秒経過で勝利
 			if (holdtimer <= 0.0f) {
 				holdtimer = 0;
-				win.SetActive (true);
-				wintext.text = "2P WIN!";
-				if (Input.anyKeyDown) {
-					SceneManager.LoadScene ("Title");
-				}
+
+				Invoke ("Scene", 5.0f);
 				//2Pの勝利
 
 			}
@@ -246,29 +235,30 @@ public class HoldManagerScript : StateManagerScript {
 		Transform hand = player1.transform.FindChild ("Hand_Model");
 		Animator anim = hand.gameObject.GetComponent<Animator> ();
 
-		//----------- バイブスの分岐 ---------------
+		//----------- hpが100ならバイブスが2 50なら1 15以下なら0,3 ---------------
 		float vibes;
 		if (PHPS_1P.hp < 10) {
-			vibes = vibes_pattern [0];
+			vibes = vibes_patern [0];
 		} else if (PHPS_1P.hp >= 10 && PHPS_1P.hp < 20) {
-			vibes = vibes_pattern [1];
+			vibes = vibes_patern [1];
 		} else if (PHPS_1P.hp >= 20 && PHPS_1P.hp < 30) {
-			vibes = vibes_pattern [2];
+			vibes = vibes_patern [2];
 		} else if (PHPS_1P.hp >= 30 && PHPS_1P.hp < 40) {
-			vibes = vibes_pattern [3];
+			vibes = vibes_patern [3];	
 		} else if (PHPS_1P.hp >= 40 && PHPS_1P.hp < 50) {
-			vibes = vibes_pattern [4];
+			vibes = vibes_patern [4];
 		} else if (PHPS_1P.hp >= 50 && PHPS_1P.hp < 60) {
-			vibes = vibes_pattern [5];
+			vibes = vibes_patern [5];
 		} else if (PHPS_1P.hp >= 60 && PHPS_1P.hp < 70) {
-			vibes = vibes_pattern [6];
+			vibes = vibes_patern [6];
 		} else if (PHPS_1P.hp >= 70 && PHPS_1P.hp < 80) {
-			vibes = vibes_pattern [7];
+			vibes = vibes_patern [7];
 		} else if (PHPS_1P.hp >= 80 && PHPS_1P.hp < 90) {
-			vibes = vibes_pattern [8];
+			vibes = vibes_patern [8];
 		} else {
-			vibes = vibes_pattern [9];
-		} 
+			vibes = vibes_patern [9];
+		}
+
 
 
 		//-----「↑』入力時直前に「↑」が押されていなければカウント
@@ -328,30 +318,29 @@ public class HoldManagerScript : StateManagerScript {
 		Animator anim = hand.gameObject.GetComponent<Animator> ();
 
 
-		//----------- バイブスの分岐 ---------------
+		//----------- hpが100ならバイブスが2 50なら1 15以下なら0,3 ---------------
 		float vibes;
 		if (PHPS_2P.hp < 10) {
-			vibes = vibes_pattern [0];
-		} else if (PHPS_2P.hp >= 10 && PHPS_1P.hp < 20) {
-			vibes = vibes_pattern [1];
-		} else if (PHPS_2P.hp >= 20 && PHPS_1P.hp < 30) {
-			vibes = vibes_pattern [2];
-		} else if (PHPS_2P.hp >= 30 && PHPS_1P.hp < 40) {
-			vibes = vibes_pattern [3];
-		} else if (PHPS_2P.hp >= 40 && PHPS_1P.hp < 50) {
-			vibes = vibes_pattern [4];
-		} else if (PHPS_2P.hp >= 50 && PHPS_1P.hp < 60) {
-			vibes = vibes_pattern [5];
-		} else if (PHPS_2P.hp >= 60 && PHPS_1P.hp < 70) {
-			vibes = vibes_pattern [6];
-		} else if (PHPS_2P.hp >= 70 && PHPS_1P.hp < 80) {
-			vibes = vibes_pattern [7];
-		} else if (PHPS_2P.hp >= 80 && PHPS_1P.hp < 90) {
-			vibes = vibes_pattern [8];
+			vibes = vibes_patern [0];
+		} else if (PHPS_2P.hp >= 10 && PHPS_2P.hp < 20) {
+			vibes = vibes_patern [1];
+		} else if (PHPS_2P.hp >= 20 && PHPS_2P.hp < 30) {
+			vibes = vibes_patern [2];
+		} else if (PHPS_2P.hp >= 30 && PHPS_2P.hp < 40) {
+			vibes = vibes_patern [3];	
+		} else if (PHPS_2P.hp >= 40 && PHPS_2P.hp < 50) {
+			vibes = vibes_patern [4];
+		} else if (PHPS_2P.hp >= 50 && PHPS_2P.hp < 60) {
+			vibes = vibes_patern [5];
+		} else if (PHPS_2P.hp >= 60 && PHPS_2P.hp < 70) {
+			vibes = vibes_patern [6];
+		} else if (PHPS_2P.hp >= 70 && PHPS_2P.hp < 80) {
+			vibes = vibes_patern [7];
+		} else if (PHPS_2P.hp >= 80 && PHPS_2P.hp < 90) {
+			vibes = vibes_patern [8];
 		} else {
-			vibes = vibes_pattern [9];
-		} 
-
+			vibes = vibes_patern [9];
+		}
 
 
 		//-----「↑』入力時直前に「↑」が押されていなければカウント
@@ -400,5 +389,9 @@ public class HoldManagerScript : StateManagerScript {
 		}
 
 		Debug.Log ("ぐるぐる" + escape);
+	}
+
+	void Scene(){
+		SceneManager.LoadScene ("Title");
 	}
 }

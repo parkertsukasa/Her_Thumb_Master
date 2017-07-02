@@ -21,6 +21,14 @@ public class StateManagerScript : MonoBehaviour {
 	private Transform hand;
 	private Animator anim;
 
+	public GameObject exclamation;
+
+	public GameObject camera;
+	private AudioSource audio;
+
+	public GameObject button;
+	public GameObject stick;
+
 
 
 	public enum move_state
@@ -36,6 +44,10 @@ public class StateManagerScript : MonoBehaviour {
 		hand = transform.FindChild ("Hand_Model");
 		anim = hand.GetComponent<Animator> ();
 		Invoke ("StartBattle", 2.0f);
+		camera = GameObject.Find ("Main_Camera");
+		audio = camera.GetComponent<AudioSource> ();
+		button.SetActive (false);
+		stick.SetActive (false);
 	}
 
 	private void StartBattle(){
@@ -50,6 +62,29 @@ public class StateManagerScript : MonoBehaviour {
 		ForceCheckReset ();
 
 		Reset_to_Idle ();
+
+		if (nowstate == state.hissatsu) {
+			audio.volume = 0.0f;
+		} else {
+			audio.volume = 0.7f;
+		}
+
+		if (nowstate == state.bind_l || nowstate == state.bind_s) {
+			exclamation.SetActive (true);
+		} else {
+			exclamation.SetActive (false);
+		}
+
+		if (nowstate == state.hold_l || nowstate == state.hold_m || nowstate == state.hold_s) {
+			button.SetActive (true);
+			stick.SetActive (false);
+		} else if (nowstate == state.held_l || nowstate == state.held_m || nowstate == state.held_s) {
+			button.SetActive (false);
+			stick.SetActive (true);
+		} else {
+			button.SetActive (false);
+			stick.SetActive (false);
+		}
 
 	}
 
@@ -84,7 +119,9 @@ public class StateManagerScript : MonoBehaviour {
 		//bind状態（短）からの復帰
 		if (nowstate == state.bind_s) {
 			timer += Time.deltaTime;
+			exclamation.SetActive (true);
 			if (timer >= bindtime_short) {
+				exclamation.SetActive (false);
 				Idle ();
 				timer = 0;
 			}
@@ -92,7 +129,9 @@ public class StateManagerScript : MonoBehaviour {
 		//bind状態（長）からの復帰
 		if (nowstate == state.bind_l) {
 			timer += Time.deltaTime;
+			exclamation.SetActive (true);
 			if (timer >= bindtime_long) {
+				exclamation.SetActive (false);
 				Idle ();
 				timer = 0;
 			}
@@ -146,6 +185,7 @@ public class StateManagerScript : MonoBehaviour {
 
 	//Idle状態に戻す
 	public void Idle(){
+
 		nowstate = state.idle;
 
 		//---------- Animatorの管理
@@ -158,6 +198,10 @@ public class StateManagerScript : MonoBehaviour {
 		myanim.SetBool ("Snake",false);
 		myanim.SetBool ("Bind", false);
 		myanim.SetBool ("Pistol", false);
+
+		exclamation.SetActive (false);
+		button.SetActive (false);
+		stick.SetActive (false);
 	}
 		
 }

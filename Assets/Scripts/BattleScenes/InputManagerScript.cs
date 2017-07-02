@@ -97,11 +97,10 @@ public class InputManagerScript : MonoBehaviour {
 			AMS.Snake (player2, player1);//Snake
 			r2pushed_1p = false;
 		}
-		//---------- 1PのR1が押されたとき -----------
-		if (Input.GetButtonDown("1P_R")) {
+
+		if (Input.GetButtonDown ("1P_R")) {
 			AMS.Snake (player2, player1);//Snake
 		}
-
 
 		//---------- 2PのR2が押された時 ----------
 		if (r2_2p > 0.5f) {
@@ -118,8 +117,8 @@ public class InputManagerScript : MonoBehaviour {
 			AMS.Snake (player1, player2);//Snake
 			r2pushed_2p = false;
 		}
-		//---------- 2PのR1が押されたとき -----------
-		if (Input.GetButtonDown("2P_R")) {
+
+		if (Input.GetButtonDown ("2P_R")) {
 			AMS.Snake (player1, player2);//Snake
 		}
 
@@ -143,8 +142,7 @@ public class InputManagerScript : MonoBehaviour {
 			l2pushed_1p = false;
 		}
 
-		//---------- 1PのL1が押されたとき -----------
-		if (Input.GetButtonDown("1P_L")) {
+		if (Input.GetButtonDown ("1P_L")) {
 			HissatsuWazaScript HWS = player1.GetComponent<HissatsuWazaScript> ();
 			HWS.Runch ();
 		}
@@ -174,11 +172,12 @@ public class InputManagerScript : MonoBehaviour {
 			l2pushed_2p = false;
 		}
 
-		//---------- 2PのL1が押されたとき -----------
-		if (Input.GetButtonDown("2P_L")) {
+		if (Input.GetButtonDown ("2P_L")) {
 			HissatsuWazaScript HWS = player2.GetComponent<HissatsuWazaScript> ();
 			HWS.Runch ();
 		}
+
+
 
 
 
@@ -200,7 +199,7 @@ public class InputManagerScript : MonoBehaviour {
 			MMS.Player_Move (player2, hrzn_2p,2);
 		} else {
 			MMS.Player_Stop (player2);//速度0に
-			if (SMS_2P.runstate == StateManagerScript.move_state.walk) {
+			if (SMS_2P.runstate == StateManagerScript.move_state.walk || SMS_2P.runstate == StateManagerScript.move_state.idle_dush) {
 				SMS_2P.runstate = StateManagerScript.move_state.idle_dush;
 			} else {
 				SMS_2P.runstate = StateManagerScript.move_state.idle;

@@ -45,6 +45,7 @@ public class HPManagerScript : MonoBehaviour {
 	public States states_2p = new States(1,1,1);
 
 	public GameObject statesmanager;
+	private CharaStatusScript CSS;
 
 	private bool startbattle; 
 
@@ -68,10 +69,13 @@ public class HPManagerScript : MonoBehaviour {
 		startbattle = false;
 		Invoke ("BattleStart", 2.0f);
 
-		//statesmanager = GameObject.Find ("");
+		statesmanager = GameObject.Find ("CharaStatusManager");
+		CSS = statesmanager.GetComponent<CharaStatusScript> ();
+
+
 		//
-		//states_1p = new States();
-		//states_2p = new States();
+		states_1p = CSS.states1p;
+		states_2p = CSS.states2p;
 	}
 
 	private void BattleStart(){
@@ -101,7 +105,18 @@ public class HPManagerScript : MonoBehaviour {
 		hp_2p = PHPS_2P.hp;
 
 		hpber_1p.fillAmount = hp_1p * 0.01f;
+		if (hp_1p < 20) {
+			timer += Time.deltaTime * 2.0f;
+			hpber_1p.color = new Color(1,1,1, Mathf.Sin (180 * timer * Mathf.Deg2Rad));
+		}
+
+
 		hpber_2p.fillAmount = hp_2p * 0.01f;
+		if (hp_2p < 20) {
+			timer += Time.deltaTime * 2.0f;
+			hpber_2p.color = new Color(1,1,1, Mathf.Sin (180 * timer * Mathf.Deg2Rad));
+		}
+
 
 		if (hp_1p <= 0) {
 			hp_1p = 1;

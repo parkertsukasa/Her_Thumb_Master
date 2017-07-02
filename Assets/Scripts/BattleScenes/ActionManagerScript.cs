@@ -130,7 +130,6 @@ public class ActionManagerScript : MonoBehaviour {
 			
 
 			mySMS.Attack ();
-			SEPS.Attack ();
 
 
 			//仮
@@ -203,9 +202,8 @@ public class ActionManagerScript : MonoBehaviour {
 			case StateManagerScript.state.attack://相手が「attack」だっったら
 				player1.transform.position = Vector3.Lerp(player1.transform.position,new Vector3(-5,0,0),3.0f);//仕切り直し
 				player2.transform.position = Vector3.Lerp(player2.transform.position,new Vector3(5,0,0),3.0f);//仕切り直し
-				SEPS.Hold ();
-				AFS.Call_IF();
 				myanim.SetBool("Attack",false);
+				AFS.Call_IF();
 				break;
 			case StateManagerScript.state.bind_l://相手が「bind_l」だっったら
 
@@ -372,12 +370,16 @@ public class ActionManagerScript : MonoBehaviour {
 				AttackEffectScript AES = myself.GetComponent<AttackEffectScript>();
 				AES.PistolEffect_On ();
 				SEPS.P1_Tsumetobashi ();
+				PlayerHPScript PHPS = player2.GetComponent<PlayerHPScript> ();
+				PHPS.Pistol ();
 			}
 			if (p == 2) {
 				Instantiate (tsume_2p, myself.transform.position, Quaternion.identity);//爪を生成
 				AttackEffectScript AES = myself.GetComponent<AttackEffectScript>();
 				AES.PistolEffect_On ();
 				SEPS.P2_Tsumetobashi ();
+				PlayerHPScript PHPS = player1.GetComponent<PlayerHPScript> ();
+				PHPS.Pistol ();
 			}
 		}
 	}

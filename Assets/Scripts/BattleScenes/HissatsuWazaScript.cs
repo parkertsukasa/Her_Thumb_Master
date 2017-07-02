@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HissatsuWazaScript : MonoBehaviour {
 
-	public Image ber;
+	public Image bar;
 
 	public const float up = 10.0f;
 
@@ -30,6 +30,7 @@ public class HissatsuWazaScript : MonoBehaviour {
 
 	public GameObject bigchargeeffect;
 
+	float timer;
 
 	// Use this for initialization
 	void Start () {
@@ -49,8 +50,7 @@ public class HissatsuWazaScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		ber.fillAmount = pp/100;
-
+		bar.fillAmount = pp / 100;
 
 		if (pp >= 100) {
 			canrunch = true;
@@ -86,7 +86,7 @@ public class HissatsuWazaScript : MonoBehaviour {
 				mySMS.Hissatsu ();
 				myanim.SetBool ("Hissatsu", true);
 
-				PHPS.Damage_Hissatsu ();//仮
+
 
 				oppSMS.Idle ();
 				Invoke ("HitHissatsu", 2.4f);
@@ -108,6 +108,7 @@ public class HissatsuWazaScript : MonoBehaviour {
 
 	private void HitReset(){
 		oppanim.SetBool("HitHissatsu",false);
+		PHPS.Damage_Hissatsu ();//仮
 	}
 
 
